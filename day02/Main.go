@@ -130,7 +130,7 @@ func main() {
 	// 计算获取c的值 然后判断c的值是不是大于10
 	if c := a + b; c > 10 {
 		fmt.Println("a > b", c)
-		// goto 语法 白哦签名是大小写敏感的
+		// goto 语法 标签名是大小写敏感的
 		goto GOThere
 	} else {
 		fmt.Println("a < b", c)

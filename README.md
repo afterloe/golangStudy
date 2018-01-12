@@ -12,4 +12,5 @@ golang 教程 学习笔记
   * 变量
   * map & slice
   * make & new 以及默认值
-
+* [第二天](day02/index.md)
+	* 函数、流程、goto、循环
