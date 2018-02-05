@@ -69,3 +69,44 @@ simpleMap := map[string]int { "one":1, "two":2, "three":3 }
 		fmt.Printf("simapleMap Value is %d \n", value)
 	}
 ```
+go是支持使用指针传参的，所以传入指针的时候时候，修改是会对所有的东西进行修改。而且和java的继承方式一样，也有继承、重写这两种操作，差距不大。  
+
+interface能够接受struct的函数，但是函数描述必须一致，参数列表和返回内容也是一样的才能进行代理。  
+struct的`String`方法类似于java的`toString`的写法。而空interface是可以接受任何参数
+
+```golan
+type voidActivity interface {}
+```
+
+而且interface 是支持数组列表循环调用的，而且 `comma-ok`断言可以 来确认是否存储了T类型。value就是变量的值，ok是一个bool类 型，element是interface变量，T是断言的类型
+```golan
+value, ok = element.(T)
+```
+如果element里面确实存储了T类型的数值，那么ok返回true，否则返回false。
+```golan
+	if value, ok := activity.(Developer); ok {
+		fmt.Println("activity 是Developer 值是", value)
+	}
+```
+
+当然也是可以用以下方法
+```golan
+  actList := make([]HumanActivity, 3)
+	actList[0], actList[1], actList[2] = yyy, tom, grace // 也能用 slice 进行结构
+
+	for _, element := range actList {
+		// 判断 数组中的 interface 是不是特定的类型
+		if value, ok := element.(Developer); ok {
+			fmt.Println("has info", value, ok)
+		}
+	}
+
+	switch value := element.(type) {
+		case Developer:
+		break;
+		case Person;
+		break;
+		default:
+		break;
+	}
+```

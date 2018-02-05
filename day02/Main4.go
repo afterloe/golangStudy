@@ -23,7 +23,7 @@ type HumanActivity interface {
 }
 
 // 申明一个空的interface 他是可以存储接收任意数值，可以理解为 void *
-type voidActivity interface{
+type voidActivity interface {
 
 }
 
