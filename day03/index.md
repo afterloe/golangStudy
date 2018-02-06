@@ -27,4 +27,4 @@ type vo2 interface {
 
 使用`runtime`可以进行go的并发调用[代码在这](./Main2.go) 使用`go`关键字，如果要运用多核的话，需要使用`GOMAXPROCS`来设置同时运行的系统线程最大数量  
 
-多核或者多并发可以使用`channel`来实现夸线程通讯，使用关键字`chan`来执行通知的管道流，而且channel可以指定是使用普通还是缓冲模式[代码在这](./Main3.go)，当然也可以使用`select`来选择的输入channel或来设置timeout[代码在这](./Main4.go) 他的高阶使用可以再项目中进一步的开发
+多核或者多并发可以使用`channel`来实现夸线程通讯，使用关键字`chan`来执行通知的管道流，而且channel可以指定是使用普通还是缓冲模式[代码在这](./Main3.go)，当然也可以使用`select`来选择的输入channel或来设置timeout同时还有匿名函数的使用[代码在这](./Main4.go) 他的高阶使用可以再项目中进一步的开发
