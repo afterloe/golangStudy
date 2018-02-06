@@ -3,7 +3,7 @@ package main
 import  (
 	"./fs" // 导入函数 会调用 该包的 init 函数
 	"fmt"
-	"strconv"
+	"strconv" // 工具类 转换 bool 转换为 string
 )
 
 func main()  {
@@ -21,4 +21,12 @@ func main()  {
 	}
 
 	fmt.Println(info)
+
+	flag, err := fs.WriteRealFile([]byte("i need you"), "test")
+	if err != nil {
+		fmt.Println("find error")
+		fmt.Println(err.Error())
+	}
+
+	fmt.Println("write file " + strconv.FormatBool(flag))
 }
