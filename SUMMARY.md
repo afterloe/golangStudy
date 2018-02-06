@@ -7,5 +7,6 @@
     * make & new 以及默认值
 * [第二天](day02/index.md)
     * 函数、流程、goto、循环
-        * [结构体 struct](day02/struct.md)
+    * [结构体 struct](day02/struct.md)
+* [第三天](day03/index.md)
 
