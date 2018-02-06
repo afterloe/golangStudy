@@ -9,4 +9,5 @@
     * 函数、流程、goto、循环
     * [结构体 struct](day02/struct.md)
 * [第三天](day03/index.md)
-
+    * channel、多线程
+    * 反射、匿名函数、interface继承
