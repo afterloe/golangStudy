@@ -42,10 +42,16 @@ func main() {
 	json, _ := fs.ReadRealFile("/Users/afterloe/Afterloe/node/cynomy_axure", "package.json")
 	obj, _ := fs.FormatToStruct(&json) // 文件转换为 vol interface {} 的实例
 
+	//depMap := obj["dependencies"].(map[string]interface {}) // 可以直接使用 获取的也是 vol interface {}
 	depMap := obj["dependencies"] // 可以直接使用 获取的也是 vol interface {}
 	fmt.Println(obj["name"].(string)) // 按照string 进行处理
 	fmt.Println(obj["age"].(float64)) // 转换为int 进行处理
 	v := reflect.ValueOf(depMap) // 使用反射 获取 map
+
+	// 获取map中的指定值
+	// fmt.Println(depMap["koa"])
+	fmt.Println(reflect.TypeOf(depMap)) // map[string]interface {}
+	fmt.Println(v.MapIndex(reflect.ValueOf("koa"))) // 使用这个方式来直接取map 中 koa的值
 
 	// index 第一个参数是 下标 -- 循环输出map中的值
 	for _, key := range v.MapKeys() {
@@ -55,6 +61,9 @@ func main() {
 
 	// 循环输出 slice 中的值
 	keywords := obj["keywords"].([]interface{})
+	fmt.Println(reflect.TypeOf(keywords))
+	v = reflect.ValueOf(keywords)
+	fmt.Println(v.Index(0)) // 直接取第一个数的值
 	for _, val := range keywords{
 		val := reflect.ValueOf(val)
 		fmt.Println(val.Interface())
