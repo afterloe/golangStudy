@@ -23,7 +23,7 @@ func main() {
 
 	fmt.Println(info)
 
-	flag, err := fs.WriteRealFile([]byte("i need you"), "test")
+	flag, err := fs.WriteRealFile([]byte("i need you"), "test") // 往 /tmp/test 文件中写入一句话
 	if err != nil {
 		fmt.Println("find error")
 		fmt.Println(err.Error())
@@ -32,20 +32,31 @@ func main() {
 	fmt.Println("write file " + strconv.FormatBool(flag))
 
 	user := map[string]interface{}{"name": "afterloe", "sex": 0, "domain": [...]string{"go", "java", "cpp"}}
-	userStr, error := fs.FormatToString(user)
+	userStr, error := fs.FormatToString(&user) // 获取user转换后的 json文本
 	if nil != error {
 		fmt.Println(error)
 	}
 	fmt.Println(userStr)
 
+	// 读取本地文件中的json文件
 	json, _ := fs.ReadRealFile("/Users/afterloe/Afterloe/node/cynomy_axure", "package.json")
-	obj,_ := fs.FormatToStruct(json)
+	obj, _ := fs.FormatToStruct(&json) // 文件转换为 vol interface {} 的实例
 
-	depMap := obj["dependencies"]
-	v := reflect.ValueOf(depMap)
-	// index
+	depMap := obj["dependencies"] // 可以直接使用 获取的也是 vol interface {}
+	fmt.Println(obj["name"].(string)) // 按照string 进行处理
+	fmt.Println(obj["age"].(float64)) // 转换为int 进行处理
+	v := reflect.ValueOf(depMap) // 使用反射 获取 map
+
+	// index 第一个参数是 下标 -- 循环输出map中的值
 	for _, key := range v.MapKeys() {
 		val := v.MapIndex(key)
 		fmt.Printf("%s -> %s \n", key.Interface(), val.Interface())
+	}
+
+	// 循环输出 slice 中的值
+	keywords := obj["keywords"].([]interface{})
+	for _, val := range keywords{
+		val := reflect.ValueOf(val)
+		fmt.Println(val.Interface())
 	}
 }
