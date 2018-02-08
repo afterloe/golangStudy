@@ -4,6 +4,7 @@ import  (
 	"./fs" // 导入函数 会调用 该包的 init 函数
 	"fmt"
 	"strconv" // 工具类 转换 bool 转换为 string
+	"reflect"
 )
 
 func main() {
@@ -37,5 +38,14 @@ func main() {
 	}
 	fmt.Println(userStr)
 
-	
+	json, _ := fs.ReadRealFile("/Users/afterloe/Afterloe/node/cynomy_axure", "package.json")
+	obj,_ := fs.FormatToStruct(json)
+
+	depMap := obj["dependencies"]
+	v := reflect.ValueOf(depMap)
+	// index
+	for _, key := range v.MapKeys() {
+		val := v.MapIndex(key)
+		fmt.Printf("%s -> %s \n", key.Interface(), val.Interface())
+	}
 }
