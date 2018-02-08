@@ -6,13 +6,13 @@ import  (
 	"strconv" // 工具类 转换 bool 转换为 string
 )
 
-func main()  {
+func main() {
 	fs.ReadFile("../info") // 调用方法
 	//fs.sayHello()  go 约定 大写开头的就是 public 小写开头的 就是 private
 	fmt.Println("export value is " + strconv.Itoa(fs.MIN_LINE)) // 获取 fs 导出的变量
 
 	// 调用包里的模块
-	info, err := fs.ReadRealFile("/Users/afterloe/Afterloe/go/golangStudy", "LICENSE")
+	info, err := fs.ReadRealFile("/Users/afterloe/Afterloe/go/golangStudy", ".gitignore")
 	// 如果存在error 就输出
 	if nil != err {
 		fmt.Println("find err")
@@ -29,4 +29,13 @@ func main()  {
 	}
 
 	fmt.Println("write file " + strconv.FormatBool(flag))
+
+	user := map[string]interface{}{"name": "afterloe", "sex": 0, "domain": [...]string{"go", "java", "cpp"}}
+	userStr, error := fs.FormatToString(user)
+	if nil != error {
+		fmt.Println(error)
+	}
+	fmt.Println(userStr)
+
+	
 }
