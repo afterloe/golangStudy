@@ -1,7 +1,7 @@
 # 第三天
 
 interface 和 struct 一样是能够进行循环嵌入的。嵌入的方式如下
-```golan
+```golang
 type vo1 interface {
 	equal()
 }
@@ -16,7 +16,7 @@ type vo2 interface {
     
 反射是使用`reflect`包，使用方法`ValueOf`和`TypeOf`来反射获取数据的类型和值，当然要求就是被反射的值是能够修改的。interface的值是不能进行修改的，会报错  
 修改值的方法如下
-```golan
+```golang
   p := reflect.ValueOf(&x)
 	v := p.Elem()
 	v.SetFloat(3.14)

@@ -11,3 +11,8 @@
 * [第三天](day03/index.md)
     * channel、多线程
     * 反射、匿名函数、interface继承
+* [第四天](day04/index.md)
+    * 反射的使用
+    * 读取、写入文件与json处理
+    * 分包分模块使用
+
