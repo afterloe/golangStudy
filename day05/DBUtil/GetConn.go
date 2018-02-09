@@ -19,13 +19,14 @@ func init() {
 	sqlConnectionTemplate = templatePoint
 }
 
-func GetConnection(info *DBConnectionInfo) (*sql.DB, error) {
+func getConnection() (*sql.DB, error) {
 	if nil == sqlConnectionTemplate {
 		return nil, &Error{"初始化失败"}
 	}
 
+	info := getConnectionInfo()
 	var tpl bytes.Buffer
-	if err := sqlConnectionTemplate.ExecuteTemplate(&tpl, "db", *info); err != nil {
+	if err := sqlConnectionTemplate.ExecuteTemplate(&tpl, "db", info); err != nil {
 		fmt.Println(err.Error())
 		return nil, &Error{"sql转换失败"}
 	}
