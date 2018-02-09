@@ -2,7 +2,6 @@ package DBUtil
 
 import (
 	"fmt"
-	"reflect"
 )
 
 type connectInfo struct {
@@ -23,6 +22,10 @@ func InitConnectionInfo(uname, dbname, pwd, host string) {
 	info = &connectInfo{uname, dbname, pwd, host}
 }
 
-func getConnection() *connectInfo {
-	if _, ok := reflect.TypeOf(info)
+func getConnectionInfo() *connectInfo {
+	if val, ok := info.(*connectInfo); ok {
+		return val
+	} else {
+		return nil
+	}
 }
