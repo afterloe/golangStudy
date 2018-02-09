@@ -19,7 +19,7 @@ func init() {
 	sqlConnectionTemplate = templatePoint
 }
 
-func GetConnection(info *DBConnectionInfo) (*sql.DB, error) {
+func getConnection(info *connectInfo) (*sql.DB, error) {
 	if nil == sqlConnectionTemplate {
 		return nil, &Error{"初始化失败"}
 	}

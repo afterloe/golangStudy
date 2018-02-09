@@ -7,7 +7,11 @@ import (
 )
 
 func main() {
-	db, err := DBUtil.GetConnection(&DBUtil.DBConnectionInfo{"centos", "administrative", "user123", "kini"})
+	db, err := DBUtil.GetConnection(&DBUtil.DBConnectionInfo {
+			"centos",
+			"administrative",
+			"user123",
+			"kini"})
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -17,6 +21,7 @@ func main() {
 		fmt.Println(err.Error())
 		return
 	}
+
 	for rows.Next() {
 		var (
 			id int
