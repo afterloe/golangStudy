@@ -1,4 +1,4 @@
-# golangStudy
+# go语言学习笔记
 
 > create by afterloe <lm6289511@gmail.com>  
 > version is 0.0.1  
