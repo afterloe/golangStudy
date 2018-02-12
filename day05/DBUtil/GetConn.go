@@ -9,32 +9,46 @@ import (
 	"bytes"
 )
 
+// 设置 sql 链接模板
 var sqlConnectionTemplate *template.Template
+var sqlConnectionStr string
 
 func init() {
-	templatePoint, err := template.New("db").Parse("user={{.Uname}} dbname={{.DbName}} password={{.Pwd}} host={{.Host}} sslmode=disable")
-	if nil != err {
-		sqlConnectionTemplate = nil
-	}
+	// 初始化模板参数
+	templatePoint, _ := template.New("db").Parse("user={{.Uname}} dbname={{.DbName}} password={{.Pwd}} host={{.Host}} sslmode=disable")
 	sqlConnectionTemplate = templatePoint
 }
 
-func getConnection() (*sql.DB, error) {
-	if nil == sqlConnectionTemplate {
-		return nil, &Error{"初始化失败"}
+type breakthroughPoint interface {
+	execute(*sql.DB) (interface{}, error)
+}
+
+func UseConnection(point *breakthroughPoint) (interface{}, error) {
+	db, error := openConnection()
+	if nil != error {
+		return nil, &Error{error.Error()}
+	}
+	point.execute(db)
+
+	db.Close()
+
+	return nil, nil
+}
+
+func openConnection()(*sql.DB, error) {
+	if "" != sqlConnectionStr {
+		if nil == sqlConnectionTemplate {
+			return nil, &Error{"初始化失败"}
+		}
+		connectInfo := getConnectionInfo()
+		var tpl bytes.Buffer
+		if err := sqlConnectionTemplate.ExecuteTemplate(&tpl, "db", connectInfo); err != nil {
+			fmt.Println(err.Error())
+			return nil, &Error{"sql转换失败"}
+		}
+
+		sqlConnectionStr = tpl.String()
 	}
 
-	info := getConnectionInfo()
-	var tpl bytes.Buffer
-	if err := sqlConnectionTemplate.ExecuteTemplate(&tpl, "db", info); err != nil {
-		fmt.Println(err.Error())
-		return nil, &Error{"sql转换失败"}
-	}
-
-	db, err := sql.Open("postgres", tpl.String())
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	return db, nil
+	return sql.Open("postgres", sqlConnectionStr)
 }
