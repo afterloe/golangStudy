@@ -2,6 +2,7 @@ package DBUtil
 
 import "fmt"
 
+// 自定义异常输出
 type Error struct {
 	msg string
 }
