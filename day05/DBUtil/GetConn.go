@@ -6,7 +6,6 @@ import (
 	"fmt"
 	"text/template"
 	"bytes"
-	"reflect"
 )
 
 // 设置 sql 链接模板
@@ -18,30 +17,29 @@ func init() {
 	templatePoint, _ := template.New("db").
 		Parse("user={{.Uname}} dbname={{.DbName}} password={{.Pwd}} host={{.Host}} sslmode=disable")
 	sqlConnectionTemplate = templatePoint
+	sqlConnectionStr = ""
 }
 
 type breakthroughPoint interface {
 	execute(*sql.DB) (interface{}, error)
 }
 
-func UseConnection(point *breakthroughPoint) (interface{}, error) {
+func UseConnection(point breakthroughPoint) (interface{}, error) {
 	db, error := openConnection()
 	if nil != error {
 		return nil, &Error{error.Error()}
 	}
-	val := reflect.ValueOf(point)
-	ret := val.MethodByName("execute").
-		Call([]reflect.Value{reflect.ValueOf(db)})
-	if val, ok := ret[len(ret) - 1].Type().(error); ok {
-		return nil, val
-	}
+	rest, err := point.execute(db)
+	//val := reflect.ValueOf(point)
+	//ret := val.MethodByName("execute").
+	//	Call([]reflect.Value{reflect.ValueOf(db)})
 	defer db.Close()
 
-	return ret[0], nil
+	return rest, err
 }
 
 func openConnection()(*sql.DB, error) {
-	if "" != sqlConnectionStr {
+	if "" == sqlConnectionStr {
 		if nil == sqlConnectionTemplate {
 			return nil, &Error{"初始化失败"}
 		}
@@ -54,6 +52,5 @@ func openConnection()(*sql.DB, error) {
 
 		sqlConnectionStr = tpl.String()
 	}
-
 	return sql.Open("postgres", sqlConnectionStr)
 }

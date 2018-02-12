@@ -1,9 +1,6 @@
 package DBUtil
 
-import (
-	"fmt"
-	"reflect"
-)
+import "fmt"
 
 // 定义链接信息结构体
 type connectInfo struct {

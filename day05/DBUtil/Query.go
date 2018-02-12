@@ -1,6 +1,8 @@
 package DBUtil
 
-import "database/sql"
+import (
+	"database/sql"
+)
 
 type queryExecute struct {
 	sql string
@@ -43,7 +45,7 @@ func (query *queryExecute) execute(db *sql.DB) (interface{}, error) {
 func QueryInfo(sql string, args ...interface{})([]map[string]interface{}, error){
 	var point breakthroughPoint
 	point = &queryExecute{sql, args}
-	result, err := UseConnection(&point)
+	result, err := UseConnection(point)
 	if nil != err {
 		return nil, &Error{err.Error()}
 	}
