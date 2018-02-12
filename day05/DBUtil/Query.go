@@ -1,14 +1,13 @@
 package DBUtil
 
-func QueryInfo(sql string, args ...interface{})([]map[string]interface{}, error){
-	db, error := getConnection()
-	if nil != error {
-		return nil, &Error{error.Error()}
-	}
-	rows, err := db.Query(sql, args...)
-	if nil != err {
-		return nil, &Error{err.Error()}
-	}
+import "database/sql"
+
+type queryExecute struct {
+	sql string
+	args []interface{}
+}
+
+func (query *queryExecute) rowsToMap(rows *sql.Rows) ([]map[string]interface{}, error) {
 	cols, _ := rows.Columns()
 	result := make([]map[string]interface{}, 0)
 	for rows.Next() {
@@ -30,6 +29,23 @@ func QueryInfo(sql string, args ...interface{})([]map[string]interface{}, error)
 		result = append(result, m)
 	}
 
-	db.Close()
 	return result, nil
+}
+
+func (query *queryExecute) execute(db *sql.DB) (interface{}, error) {
+	rows, err := db.Query(query.sql, query.args...)
+	if nil != err {
+		return nil, &Error{err.Error()}
+	}
+	return query.rowsToMap(rows)
+}
+
+func QueryInfo(sql string, args ...interface{})([]map[string]interface{}, error){
+	var point breakthroughPoint
+	point = &queryExecute{sql, args}
+	result, err := UseConnection(&point)
+	if nil != err {
+		return nil, &Error{err.Error()}
+	}
+	return result.([]map[string]interface{}), nil
 }

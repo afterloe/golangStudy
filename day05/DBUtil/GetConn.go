@@ -3,10 +3,10 @@ package DBUtil
 import (
 	"database/sql"
 	_ "github.com/lib/pq"
-	"log"
 	"fmt"
 	"text/template"
 	"bytes"
+	"reflect"
 )
 
 // 设置 sql 链接模板
@@ -15,7 +15,8 @@ var sqlConnectionStr string
 
 func init() {
 	// 初始化模板参数
-	templatePoint, _ := template.New("db").Parse("user={{.Uname}} dbname={{.DbName}} password={{.Pwd}} host={{.Host}} sslmode=disable")
+	templatePoint, _ := template.New("db").
+		Parse("user={{.Uname}} dbname={{.DbName}} password={{.Pwd}} host={{.Host}} sslmode=disable")
 	sqlConnectionTemplate = templatePoint
 }
 
@@ -28,11 +29,15 @@ func UseConnection(point *breakthroughPoint) (interface{}, error) {
 	if nil != error {
 		return nil, &Error{error.Error()}
 	}
-	point.execute(db)
+	val := reflect.ValueOf(point)
+	ret := val.MethodByName("execute").
+		Call([]reflect.Value{reflect.ValueOf(db)})
+	if val, ok := ret[len(ret) - 1].Type().(error); ok {
+		return nil, val
+	}
+	defer db.Close()
 
-	db.Close()
-
-	return nil, nil
+	return ret[0], nil
 }
 
 func openConnection()(*sql.DB, error) {
