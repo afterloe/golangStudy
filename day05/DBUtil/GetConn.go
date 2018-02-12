@@ -30,11 +30,7 @@ func UseConnection(point breakthroughPoint) (interface{}, error) {
 		return nil, &Error{error.Error()}
 	}
 	rest, err := point.execute(db)
-	//val := reflect.ValueOf(point)
-	//ret := val.MethodByName("execute").
-	//	Call([]reflect.Value{reflect.ValueOf(db)})
 	defer db.Close()
-
 	return rest, err
 }
 

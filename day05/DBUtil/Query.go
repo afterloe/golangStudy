@@ -42,6 +42,7 @@ func (query *queryExecute) execute(db *sql.DB) (interface{}, error) {
 	return query.rowsToMap(rows)
 }
 
+// 传入查询的sql 返回 结果集组成的map结果
 func QueryInfo(sql string, args ...interface{})([]map[string]interface{}, error){
 	var point breakthroughPoint
 	point = &queryExecute{sql, args}
