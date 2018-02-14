@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 	"./DBUtil"
-	"strconv"
+	"reflect"
 )
 
 func main() {
@@ -21,38 +21,23 @@ func main() {
 
 	insertSQL := "INSERT INTO public.address_engine(id, address, area_id, area_name, community_id," +
 		" community_name, gid, latitude, longitude, num, street_id, street_name) " +
-		"VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)"
+		"VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) returning id"
 
-	insertResult, err := DBUtil.InsertMap(insertSQL, []map[string]interface{}{
-		{	"id": "202890",
-			"address": "福建省福州市鼓楼区中军后6号7座806单元 - t3",
-			"area_id": "50104",
-			"area_name": "仓山区",
-			"community_id": "350102004001",
-			"community_name": "军门社区",
-			"gid": "136376",
-			"latitude": nil,
-			"longitude": nil,
-			"num": nil,
-			"street_id": "350102004000",
-			"street_name": "东街街道"},
-		{	"id": "202891",
-			"address": "福建省福州市鼓楼区中军后6号7座806单元 - t4",
-			"area_id": "50104",
-			"area_name": "仓山区",
-			"community_id": "350102004001",
-			"community_name": "军门社区",
-			"gid": "136376",
-			"latitude": nil,
-			"longitude": nil,
-			"num": nil,
-			"street_id": "350102004000",
-			"street_name": "东街街道"},
+	insertResult, err := DBUtil.InsertMap(insertSQL, []interface{}{
+		[]interface{}{202891, "福建省福州市鼓楼区中军后6号7座806单元 - t4", "350104", "仓山区", "350102004001", "军门社区", "136376", nil, nil, nil, "350102004000", "东街街道"},
+		[]interface{}{202892, "福建省福州市鼓楼区中军后6号7座806单元 - t5", "350104", "仓山区", "350102004001", "军门社区", "136376", nil, nil, nil, "350102004000", "东街街道"},
+		[]interface{}{202893, "福建省福州市鼓楼区中军后6号7座806单元 - t6", "350104", "仓山区", "350102004001", "军门社区", "136376", nil, nil, nil, "350102004000", "东街街道"},
+		[]interface{}{202894, "福建省福州市鼓楼区中军后6号7座806单元 - t7", "350104", "仓山区", "350102004001", "军门社区", "136376", nil, nil, nil, "350102004000", "东街街道"},
 	})
 
 	if nil != err {
 		fmt.Println(err.Error())
 		return
 	}
-	fmt.Println("instert sql -> " + strconv.FormatBool(insertResult))
+
+	for _, id := range insertResult {
+		val := reflect.ValueOf(id)
+		fmt.Println(val.Interface())
+	}
+
 }
