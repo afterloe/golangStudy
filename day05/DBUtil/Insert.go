@@ -27,7 +27,7 @@ func (insert *insertExecute) execute(db *sql.DB) (interface{}, error) {
 	insertHistory := make([]interface{}, 0)
 	for _, domain := range insert.domainList {
 		if res, err := stmt.Exec(mapToValueList(domain)...); nil != err {
-			return false, err
+			return nil, &Error{err.Error()}
 		} else {
 			insertHistory = append(insertHistory, res)
 		}
