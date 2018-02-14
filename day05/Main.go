@@ -29,30 +29,39 @@ func main() {
 		[]interface{}{202893, "福建省福州市鼓楼区中军后6号7座806单元 - t6", "350104", "仓山区", "350102004001", "军门社区", "136376", nil, nil, nil, "350102004000", "东街街道"},
 		[]interface{}{202894, "福建省福州市鼓楼区中军后6号7座806单元 - t7", "350104", "仓山区", "350102004001", "军门社区", "136376", nil, nil, nil, "350102004000", "东街街道"},
 	})
-
 	if nil != err {
 		fmt.Println(err.Error())
 		return
 	}
-
 	for _, id := range insertResult {
 		val := reflect.ValueOf(id)
-		fmt.Println(val.Interface())
+		fmt.Println(val.MethodByName("LastInsertId").Call(nil)[0].Interface())
 	}
 
 	updateSQL := "UPDATE public.address_engine set address = $1 WHERE id = $2"
-
 	update, err := DBUtil.UpdateMap(updateSQL, []interface{}{
 		[]interface{}{"测试地址", 202891},
 		[]interface{}{"测试地址", 202892},
 		[]interface{}{"测试地址", 202893},
 		[]interface{}{"测试地址", 202894},
 	})
-
 	if nil != err {
 		fmt.Println(err.Error())
 		return
 	}
-
 	fmt.Println(update)
+
+	deleteSQL := "DELETE FROM public.address_engine WHERE id = $1"
+	del, err := DBUtil.UpdateMap(deleteSQL, []interface{}{
+		[]interface{}{202891},
+		[]interface{}{202892},
+		[]interface{}{202893},
+		[]interface{}{202894},
+	})
+	if nil != err {
+		fmt.Println(err.Error())
+		return
+	}
+	fmt.Println(del)
+
 }
