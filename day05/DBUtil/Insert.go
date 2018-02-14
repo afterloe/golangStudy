@@ -3,20 +3,18 @@ package DBUtil
 import (
 	"database/sql"
 	"reflect"
-	"fmt"
-	"strconv"
 )
 
 type insertExecute struct {
 	sql string
-	domainList []map[string]interface{}
+	domainList []interface{}
 }
 
-func mapToValueList(m map[string]interface{}) []interface{} {
+func mapToValueList(m interface{}) []interface{} {
 	val := reflect.ValueOf(m)
 	valueList := make([]interface{}, 0)
-	for _, key := range val.MapKeys() {
-		valueList = append(valueList, val.MapIndex(key).Interface())
+	for i := 0; i < val.Len(); i++ {
+		valueList = append(valueList, val.Index(i).Interface())
 	}
 	return valueList
 }
@@ -26,27 +24,25 @@ func (insert *insertExecute) execute(db *sql.DB) (interface{}, error) {
 	if nil != error {
 		return nil, error
 	}
-	resultList := make([]interface{}, 0)
-	for i, domain := range insert.domainList {
+	insertHistory := make([]interface{}, 0)
+	for _, domain := range insert.domainList {
 		if res, err := stmt.Exec(mapToValueList(domain)...); nil != err {
-			resultList = append(resultList, res)
+			return nil, &Error{err.Error()}
 		} else {
-			fmt.Println(err.Error())
-			fmt.Println("insert error! => index is " + strconv.Itoa(i))
-			return resultList, err
+			insertHistory = append(insertHistory, res)
 		}
 	}
 
-	return resultList, nil
+	return insertHistory, nil
 }
 
-func InsertMap(sql string, domainList []map[string]interface{}) (bool, error) {
+func InsertMap(sql string, domainList []interface{}) ([]interface{}, error) {
 	var point breakthroughPoint
 	point = &insertExecute{sql, domainList}
-	_, err := UseConnection(point)
+	result, err := UseConnection(point)
 	if nil != err {
-		return false, &Error{err.Error()}
+		return nil, &Error{err.Error()}
 	}
 
-	return true, nil
+	return result.([]interface{}), nil
 }
