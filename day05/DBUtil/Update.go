@@ -36,13 +36,13 @@ func (update *updateExecute) execute(db *sql.DB) (interface{}, error) {
 	return checkRes(updateHistory)
 }
 
-func UpdateMap(sql string, domainList []interface{}) ([]interface{}, error) {
+func UpdateMap(sql string, domainList []interface{}) (bool, error) {
 	var point breakthroughPoint
 	point = &updateExecute{sql, domainList}
 	result, err := UseConnection(point)
 	if nil != err {
-		return nil, &Error{err.Error()}
+		return false, &Error{err.Error()}
 	}
 
-	return result.([]interface{}), nil
+	return result.(bool), nil
 }

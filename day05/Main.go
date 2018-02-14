@@ -40,4 +40,19 @@ func main() {
 		fmt.Println(val.Interface())
 	}
 
+	updateSQL := "UPDATE public.address_engine set address = $1 WHERE id = $2"
+
+	update, err := DBUtil.UpdateMap(updateSQL, []interface{}{
+		[]interface{}{"测试地址", 202891},
+		[]interface{}{"测试地址", 202892},
+		[]interface{}{"测试地址", 202893},
+		[]interface{}{"测试地址", 202894},
+	})
+
+	if nil != err {
+		fmt.Println(err.Error())
+		return
+	}
+
+	fmt.Println(update)
 }
