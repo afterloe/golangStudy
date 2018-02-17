@@ -19,5 +19,6 @@
     * 数据库连接
     * 字符串模板使用，输出流字符串转换
     * interface进阶使用
-* [第六条](day06/index.md)
+* [第六天](day06/index.md)
+* [第七天](day07/index.md)
 
