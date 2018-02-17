@@ -35,3 +35,4 @@ curl --request POST \
   --header 'Postman-Token: 30a9abe9-a19c-db3a-484d-3b7efe6d55bf' \
   --data 'name=joe&age=12'
 ```
+这里推荐scrypt方案，scrypt是由著名的FreeBSD黑客Colin Percival为他的备份服务Tarsnap开发的。 目前Go语言里面支持的库http://code.google.com/p/go/source/browse?repo=crypto#hg%2Fscrypt
