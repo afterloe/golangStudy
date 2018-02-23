@@ -28,7 +28,7 @@
     * 压力、性能测试
     * mock 测试
 * [第八天](day08/index.md)
-    * 实战 - 使用gin构建web基础框架
+    * [实战 - 使用gin构建web基础框架](day08/framework.md)
     * 调用docker api 构建一个SOA服务管理平台
     * 接入java eureka 调度eureka中的其他服务
     * docker 封装go的服务实现ci
