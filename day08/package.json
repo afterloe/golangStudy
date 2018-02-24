@@ -1,0 +1,14 @@
+{
+  "name": "cynomys_go",
+  "version": "0.0.1",
+  "author": "afterloe[lm6289511@gmai.com]",
+  "homePage": "https://github.com/afterloe",
+  "server": {
+    "addr": "0.0.0.1",
+    "port": "8080",
+    "multiCore": {
+      "enable": true,
+      "num": 4
+    }
+  }
+}

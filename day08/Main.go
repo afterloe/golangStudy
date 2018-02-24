@@ -5,6 +5,7 @@ import (
 	"os"
 	"fmt"
 	cli "./server"
+	"time"
 )
 
 var (
@@ -26,5 +27,6 @@ func main() {
 	runtime.GOMAXPROCS(cpuNumber)
 	fmt.Printf("listen parameter is null, will start server in %s default \n", defAddr)
 	fmt.Printf("server is init success... started pid is %d \n", pid)
+	fmt.Printf("[Cynomys] %v | started server success. \n", time.Now().Format("2006/01/02 - 15:04:05"))
 	cli.StartUpTCPServer(&defAddr)
 }

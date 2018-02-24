@@ -8,12 +8,30 @@ import (
 	"io"
 )
 
-var out io.Writer
-var logLayout string
+var (
+	out, err io.Writer
+	infoLayout, logLayout, errorLayout, timeFormat string
+)
 
 func init() {
 	out = os.Stdout
-	logLayout = "[Cynomys] %v | %3d | %13v | %15s | %-7s %s\n"
+	err = os.Stderr
+	timeFormat = "2006/01/02 - 15:04:05"
+	logLayout = "[Cynomys][log][%v] - %3d | %13v | %15s | %-7s %s\n"
+	infoLayout = "[Cynomys][info][%v] - %s \n"
+	errorLayout = "[Cynomys][error][%v] - %s \n"
+}
+
+func GetFormatTime() string {
+	return time.Now().Format(timeFormat)
+}
+
+func Error(info string) {
+	fmt.Fprintf(err, errorLayout, GetFormatTime())
+}
+
+func Info(info string) {
+	fmt.Fprintf(out, infoLayout, GetFormatTime(), info)
 }
 
 func Logger() func(*gin.Context) {
@@ -39,7 +57,7 @@ func Logger() func(*gin.Context) {
 			path = path + "?" + raw
 		}
 
-		fmt.Fprintf(out, logLayout, end.Format("2006/01/02 - 15:04:05"), statusCode,
+		fmt.Fprintf(out, logLayout, end.Format(timeFormat), statusCode,
 			latency, clientIP, method, path)
 	}
 }
