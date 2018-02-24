@@ -1,7 +1,15 @@
 package test
 
-import "testing"
+import (
+	"testing"
+	"../config"
+	"fmt"
+)
 
-func Test_readConfig(t *testing.T) {
-
+func Test_ConfigModule_readConfig(t *testing.T) {
+	val := config.Get("name")
+	fmt.Println(val)
+	if "cynomys_go" != val {
+		t.Error("get config fail.")
+	}
 }
