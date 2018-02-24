@@ -5,6 +5,9 @@ import (
 	"../integrate/logger"
 	"../exceptions"
 	"os"
+	"path/filepath"
+	"log"
+	"strings"
 )
 
 var packageJson map[string]interface{}
@@ -17,8 +20,17 @@ func checkError(err error) {
 	}
 }
 
+func getCurrentDirectory() string {
+	dir, err := filepath.Abs(filepath.Dir(os.Args[0]))
+	if err != nil {
+		log.Fatal(err)
+	}
+	return strings.Replace(dir, "\\", "/", -1)
+}
+
 func init() {
-	configInfo, err := util.ReadRealFile("/Users/afterloe/Afterloe/go/golangStudy/day08", "package.json")
+	dir := getCurrentDirectory()
+	configInfo, err := util.ReadRealFile(filepath.Join(dir, "./package.json"))
 	checkError(err)
 	pkg, err := util.FormatToStruct(&configInfo)
 	checkError(err)

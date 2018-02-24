@@ -2,19 +2,15 @@ package util
 
 import (
 	"io/ioutil"
-	"path/filepath"
 	"../../exceptions"
 	"encoding/json"
 )
 
-func ReadRealFile(path,name string) (string, error) {
-	// 读取文件
-	data, err := ioutil.ReadFile(filepath.Join(path, name))
+func ReadRealFile(path string) (string, error) {
+	data, err := ioutil.ReadFile(path)
 	if nil != err {
 		return "", &exceptions.Error{Msg: "no such this file", Code: 500}
 	}
-
-	// 将 byte 转换为 string
 	return string(data), nil
 }
 
