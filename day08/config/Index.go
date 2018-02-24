@@ -18,7 +18,7 @@ func checkError(err error) {
 }
 
 func init() {
-	configInfo, err := util.ReadRealFile("..", "package.json")
+	configInfo, err := util.ReadRealFile("/Users/afterloe/Afterloe/go/golangStudy/day08", "package.json")
 	checkError(err)
 	pkg, err := util.FormatToStruct(&configInfo)
 	checkError(err)

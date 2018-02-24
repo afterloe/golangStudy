@@ -6,6 +6,7 @@ import (
 	"../routers"
 	"../integrate/logger"
 	"../integrate/notSupper"
+	"os"
 )
 
 var notFoundStr, notSupperStr string
@@ -30,5 +31,10 @@ func StartUpTCPServer(addr *string) {
 		MaxHeaderBytes: 1 << 20,
 	}
 
-	server.ListenAndServe()
+	error := server.ListenAndServe()
+	if nil != error {
+		logger.Error("server can't to run")
+		logger.Error(error.Error())
+		os.Exit(102)
+	}
 }

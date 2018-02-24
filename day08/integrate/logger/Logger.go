@@ -27,7 +27,7 @@ func GetFormatTime() string {
 }
 
 func Error(info string) {
-	fmt.Fprintf(err, errorLayout, GetFormatTime())
+	fmt.Fprintf(err, errorLayout, GetFormatTime(), info)
 }
 
 func Info(info string) {

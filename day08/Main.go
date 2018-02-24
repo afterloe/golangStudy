@@ -7,8 +7,6 @@ import (
 	cli "./server"
 	"./integrate/logger"
 	"./config"
-	"time"
-	"strconv"
 )
 
 var (
@@ -47,11 +45,11 @@ func startUpMultiService(multiCfg map[string]interface{}) {
 		logger.Info("server will to use multi cpu")
 		if nil == coreNumber {
 			coreNumber = cpuNumber
-		} else if 0 >= coreNumber.(int) {
+		} else if 0 >= coreNumber.(float64) {
 			coreNumber = cpuNumber
 		}
 		logger.Info(fmt.Sprintf("server will use %v cpu", coreNumber))
-		runtime.GOMAXPROCS(coreNumber.(int))
+		runtime.GOMAXPROCS(int(coreNumber.(float64)))
 	}
 }
 

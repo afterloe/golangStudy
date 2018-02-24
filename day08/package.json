@@ -4,10 +4,10 @@
   "author": "afterloe[lm6289511@gmai.com]",
   "homePage": "https://github.com/afterloe",
   "server": {
-    "addr": "0.0.0.1",
+    "addr": "127.0.0.1",
     "port": "8080",
     "multiCore": {
-      "enable": true,
+      "enable": false,
       "num": 4
     }
   }
