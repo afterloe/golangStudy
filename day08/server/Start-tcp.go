@@ -4,7 +4,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"net/http"
 	r "../routers"
-	log "../integrate"
+	"../integrate/logger"
 )
 
 func StartUpTCPServer(addr *string) {
@@ -12,7 +12,7 @@ func StartUpTCPServer(addr *string) {
 	gin.SetMode(gin.ReleaseMode)
 	routers := gin.New()
 	routers.Use(gin.Recovery())
-	routers.Use(log.Logger())
+	routers.Use(logger.Logger())
 	v1 := routers.Group("/v1")
 	r.Execute(v1)
 	server := &http.Server{

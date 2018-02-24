@@ -1,4 +1,4 @@
-package integrate
+package logger
 
 import (
 	"github.com/gin-gonic/gin"
@@ -9,9 +9,11 @@ import (
 )
 
 var out io.Writer
+var logLayout string
 
 func init() {
 	out = os.Stdout
+	logLayout = "[Cynomys] %v | %3d | %13v | %15s | %-7s %s\n"
 }
 
 func Logger() func(*gin.Context) {
@@ -37,8 +39,7 @@ func Logger() func(*gin.Context) {
 			path = path + "?" + raw
 		}
 
-		fmt.Fprintf(out, "[Cynomys] %v | %3d | %13v | %15s | %-7s %s\n",
-			end.Format("2006/01/02 - 15:04:05"),
-			statusCode, latency, clientIP, method, path)
+		fmt.Fprintf(out, logLayout, end.Format("2006/01/02 - 15:04:05"), statusCode,
+			latency, clientIP, method, path)
 	}
 }
