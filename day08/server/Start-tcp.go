@@ -1,13 +1,14 @@
-package main
+package server
 
 import (
 	"github.com/gin-gonic/gin"
 	"net/http"
-	r "./routers"
+	r "../routers"
 )
 
-func StartServer(addr *string) {
+func StartUpTCPServer(addr *string) {
 	gin.DisableConsoleColor()
+	gin.SetMode(gin.ReleaseMode)
 	routers := gin.Default()
 	r.Execute(routers)
 	server := &http.Server{

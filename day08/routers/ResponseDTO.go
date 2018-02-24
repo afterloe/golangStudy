@@ -3,26 +3,29 @@ package routers
 import (
 	"fmt"
 	"net/http"
+	"reflect"
 )
 
-type responseDTO struct {
-	data interface{}
-	code int
-	msg *string
-}
+type responseDTO map[string]interface{}
 
 func (res *responseDTO) String() string {
-	return fmt.Sprintf("Response {data: %s, code: %d, msg: %s}", res.data, res.code, res.msg)
+	val := reflect.ValueOf(res)
+	return fmt.Sprintf("Response {data: %s, code: %d, msg: %s}", val.MapIndex(reflect.ValueOf("data")).Interface(),
+		val.MapIndex(reflect.ValueOf("code")).Interface(), val.MapIndex(reflect.ValueOf("msg")).Interface())
 }
 
 func Success(data interface{}) *responseDTO {
-	return &responseDTO{data, http.StatusOK, nil}
+	return Build(data, http.StatusOK, nil)
 }
 
 func Fail(code int, msg string) *responseDTO {
-	return &responseDTO{nil, code, &msg}
+	return Build(nil, code, msg)
 }
 
-func Build(data interface{}, code int, msg string) *responseDTO {
-	return &responseDTO{data, code, &msg}
+func Build(data interface{}, code int, msg interface{}) *responseDTO {
+	return &responseDTO {
+		"data": data,
+		"code": code,
+		"msg": msg,
+	}
 }

@@ -4,6 +4,7 @@ import (
 	"runtime"
 	"os"
 	"fmt"
+	cli "./server"
 )
 
 var (
@@ -23,7 +24,7 @@ func main() {
 	fmt.Printf("machine is %d cpus. \n", cpuNumber)
 	fmt.Printf("config thread number is null, will start %d thread to wrok default \n", cpuNumber)
 	runtime.GOMAXPROCS(cpuNumber)
-	fmt.Printf("listen parameter is null, will start server in %s default", defAddr)
-	fmt.Printf("server is init success... started pid is %d", pid)
-	StartServer(&defAddr)
+	fmt.Printf("listen parameter is null, will start server in %s default \n", defAddr)
+	fmt.Printf("server is init success... started pid is %d \n", pid)
+	cli.StartUpTCPServer(&defAddr)
 }
