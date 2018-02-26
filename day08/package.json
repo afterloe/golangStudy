@@ -10,5 +10,11 @@
       "enable": false,
       "num": 4
     }
+  },
+  "dependencies": {
+    "github.com/gin-gonic/gin": "laster",
+    "github.com/docker/docker": "laster",
+    "golang.org/x/net/context": "laster",
+    "github.com/lib/pq": "laster"
   }
 }
