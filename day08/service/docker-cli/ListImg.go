@@ -1,4 +1,4 @@
-package dockerE
+package docker-cli
 
 import (
 	"fmt"
