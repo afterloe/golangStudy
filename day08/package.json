@@ -16,5 +16,14 @@
     "github.com/docker/docker": "laster",
     "golang.org/x/net/context": "laster",
     "github.com/lib/pq": "laster"
+  },
+  "services": {
+    "docker-cli": {
+      "version": "1.36",
+      "socket": {
+        "enable": true,
+        "addr": "yyy:2376"
+      }
+    }
   }
 }

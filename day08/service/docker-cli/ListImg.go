@@ -1,29 +1,19 @@
-package docker-cli
+package docker_cli
 
 import (
-	"fmt"
 	"github.com/docker/docker/api/types"
-	"github.com/docker/docker/client"
-	"golang.org/x/net/context"
 )
 
-func GetImageList() interface{} {
-	ctx := context.Background()
-	cli, err := client.NewClientWithOpts(client.WithHost("http://yyy:2376"),
-		client.WithVersion("1.36"))
+func ListImage() ([]types.ImageSummary, error) {
+	cli, err := getCli()
 	if nil != err {
-		panic(err)
+		return nil, err
 	}
-
-	images, err := cli.ImageList(ctx, types.ImageListOptions{})
+	images, err := cli.ImageList(getContext(), types.ImageListOptions{})
 
 	if nil != err {
-		panic(err)
+		return nil, err
 	}
 
-	for _, image := range images {
-		fmt.Println(image)
-	}
-
-	return images
+	return images, nil
 }
