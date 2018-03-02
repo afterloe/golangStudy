@@ -25,6 +25,24 @@ var (
 ## map 和 slice
 类似于 `HashMap` 和 `LinkedArrayList` 都有自己的默认方法。
 
+## 数组的切割可以使用如下的方式
+
+```golang
+a := [...]int{1, 2, 3, 4, 5, 6, 7, 8}
+a[4:] // 跳过前4个item, 并返回后面的 [5, 6, 7, 8]
+a[3:4] // 从第4个item开始， 截止到第5个item，返回中间元素的数组[4]
+a[2:4] // 从第3个item开始， 截止到第五个item，返回中间元素的数组[3, 4]
+```
+
+## 强制转换
+string -> int
+* `strconv.Atoi("1")` # 自动转换
+* `strconv.ParseInt("1", 10, 64)` # 把十进制的1 转为int64类型
+
+int -> string
+* `strconv.Itoa(1)`
+* `strconv.FormatInt(int64, 1)`
+
 ## 各类型的初始变量
 
 - make用于内建类型(map、slice和channel)的内存分配。new用于各种类型的内存分配，直接返回指针`*T`
