@@ -14,7 +14,6 @@ func ListImage() ([]types.ImageSummary, error) {
 	if nil != err {
 		return nil, err
 	}
-
 	return images, nil
 }
 

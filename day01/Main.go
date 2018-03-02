@@ -85,6 +85,8 @@ func main() {
 		bSlice = arr3[4:5]
 	)
 
+	fmt.Println(arr3[3:])
+
 	// append函数会改变slice所引用的数组的内容，从而影响到引用同一数组的其他slice。
 	fmt.Printf("aSlice first element is %b, bSlice first element is %b \n", aSlice[0], bSlice[0])
 
