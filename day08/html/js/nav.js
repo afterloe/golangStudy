@@ -160,25 +160,25 @@ const navbarData = {
     linkedHref: "/",
     name: "Cityworks™ 云平台",
     cWNavbarInputForm: {
-        word: "Search for help ..."
+        word: "搜索获取容器"
     },
     cWNavbarRouters: {
         activeRouter: 0,
         routers: [
             {
-                name: "Images",
+                name: "镜像",
                 href: "/images.html"
             },
             {
-                name: "Containers",
+                name: "容器",
                 href: "/containers.html"
             },
             {
-                name: "Services",
+                name: "服务",
                 href: "/services.html"
             },
             {
-                name: "Others",
+                name: "其他",
                 href: "/others.html"
             }
         ]
