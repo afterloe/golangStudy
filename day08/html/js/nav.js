@@ -96,22 +96,24 @@ class CWNavbarRouters extends React.Component {
         super(props);
     }
 
+    renderRouters(index = 0, routeSlice = []) {
+        return routeSlice.map((route, i) => index === i ? (
+            <li className={"nav-item active"}>
+                <a className={"nav-link"} href={route["href"]}>{route["name"]}</a>
+            </li>
+        ) : (
+            <li className={"nav-item"}>
+                <a className={"nav-link"} href={route["href"]}>{route["name"]}</a>
+            </li>
+        ));
+    }
+
     render() {
+        const {activeRouter, routers} = this.props.data || {};
         return (
             <div className={"collapse navbar-collapse"}>
                 <ul className={"navbar-nav mr-auto"}>
-                    <li className={"nav-item"}>
-                        <a className={"nav-link"} href={"/images.html"}>Images</a>
-                    </li>
-                    <li className={"nav-item"}>
-                        <a className={"nav-link"} href={"/containers.html"}>Containers</a>
-                    </li>
-                    <li className={"nav-item"}>
-                        <a className={"nav-link"} href={"/services.html"}>Services</a>
-                    </li>
-                    <li className={"nav-item"}>
-                        <a className={"nav-link"} href={"/others.html"}>Others</a>
-                    </li>
+                    {this.renderRouters(activeRouter, routers)}
                 </ul>
             </div>
         )
@@ -124,10 +126,11 @@ class CWNavbarInputForm extends React.Component {
     }
 
     render() {
+        const {word = "Search"} = this.props.data || {};
         return (
             <form className={"form-inline my-2 my-lg-0"}>
-                <input className={"form-control mr-sm-2"} type={"search"} placeholder={"Search "}
-                       aria-label="Search"/>
+                <input className={"form-control mr-sm-2"} type={"search"} placeholder={word}
+                       aria-label={word}/>
             </form>
         )
     }
@@ -140,12 +143,13 @@ class CWNavbar extends React.Component {
     }
 
     render() {
-        const {linkedHref = "/", name = "Cityworks™"} = this.props.data;
+        const {linkedHref = "/", name = "Cityworks™", cWNavbarInputForm = {},
+            cWNavbarRouters = {}} = this.props.data || {};
         return (
             <nav className={"navbar navbar-expand-lg navbar-light"}>
                 <a className={"navbar-brand"} href={linkedHref}>{name}</a>
-                <CWNavbarInputForm />
-                <CWNavbarRouters />
+                <CWNavbarInputForm data={cWNavbarInputForm}/>
+                <CWNavbarRouters data={cWNavbarRouters}/>
                 <CWNavbarStatus />
             </nav>
         )
@@ -154,7 +158,31 @@ class CWNavbar extends React.Component {
 
 const navbarData = {
     linkedHref: "/",
-    name: "Cityworks™"
+    name: "Cityworks™ 云平台",
+    cWNavbarInputForm: {
+        word: "Search for help ..."
+    },
+    cWNavbarRouters: {
+        activeRouter: 0,
+        routers: [
+            {
+                name: "Images",
+                href: "/images.html"
+            },
+            {
+                name: "Containers",
+                href: "/containers.html"
+            },
+            {
+                name: "Services",
+                href: "/services.html"
+            },
+            {
+                name: "Others",
+                href: "/others.html"
+            }
+        ]
+    }
 };
 
 ReactDOM.render(
