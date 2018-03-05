@@ -15,3 +15,5 @@ pkg
 
 # Project-local glide cache, RE: https://github.com/Masterminds/glide/issues/736
 .glide/
+day08/html/js/lib
+day08/html/stylesheets/lib
