@@ -27,8 +27,9 @@ class CWNavbarStatus extends React.Component {
                         <li class="dropdown js-menu-container">
                             <details class="dropdown-details details-reset js-dropdown-details d-flex px-2 flex-items-center">
                                 <summary class="HeaderNavlink" aria-label="Create new…" data-ga-click="Header, create new, icon:add">
-                                    <svg aria-hidden="true" class="octicon octicon-plus float-left mr-1 mt-1" height="16" version="1.1" viewBox="0 0 12 16" width="12"><path fill-rule="evenodd" d="M12 9H7v5H5V9H0V7h5V2h2v5h5z"></path></svg>
-                                    <span class="dropdown-caret mt-1"></span>
+                                    <svg aria-hidden="true" class="octicon octicon-plus float-left mr-1 mt-1" height="16" version="1.1" viewBox="0 0 12 16" width="12">
+                                        <path fill-rule="evenodd" d="M12 9H7v5H5V9H0V7h5V2h2v5h5z"></path>
+                                    </svg>
                                 </summary>
                             </details>
                         </li>
