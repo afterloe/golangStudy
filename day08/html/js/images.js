@@ -3,8 +3,20 @@ ReactDOM.render(
         <div className={"buttonList"}>
             <button type="button" class="btn btn-primary">构建</button>
             <button type="button" class="btn btn-secondary">上传</button>
-            <button type="button" class="btn btn-success">管理</button>
+            <button type="button" class="btn btn-dark">管理</button>
         </div>
+        <span class="cwWhete"></span>
+        <div>
+            <div class="card" style={{width: "200px"}}>
+                <img class="card-img-top" src="..." alt="Card image cap" />
+                <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+            </div>
+        </div>
+        <span class="cwWhete"></span>
     </div>,
     document.getElementById('root')
 );
