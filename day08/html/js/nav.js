@@ -1,14 +1,100 @@
+class CWNavbarStatusDropdownLink extends React.Component {
+    constructor(props) {
+        super(props);
+        this.renderItem = this.renderItem.bind(this);
+    }
+
+    renderItem() {
+        const {newMenuItem} = this.props.data;
+        return newMenuItem.map(item => <a className={"dropdown-item"} href={item.href}>{item.name}</a>);
+    }
+
+    render() {
+        const {openMen} = this.props.data;
+        return (
+            <div className={openMen ? "dropdown-menu show": "dropdown-menu"}>
+                {this.renderItem()}
+            </div>
+        )
+    }
+}
+
+class CWNavbarStatusAvatarMenu extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = props.data;
+        this.openMenu = this.openMenu.bind(this);
+    }
+
+    openMenu() {
+        const { openMen = false } = this.state;
+        this.setState({openMen: !openMen});
+    }
+
+    render() {
+        const {openMen = false, profileMenuItem} = this.state;
+        return (
+            <li className="dropdown" onClick={this.openMenu}>
+                <details className="dropdown-details">
+                    <summary className="name mt-1">
+                        <img alt="@afterloe" class="avatar float-left mr-1" src="https://avatars0.githubusercontent.com/u/11550317?s=40&amp;v=4" height="20" width="20" />
+                        <span className="dropdown-caret"></span>
+                    </summary>
+                </details>
+                <CWNavbarStatusDropdownLink data={{openMen, newMenuItem: profileMenuItem}}/>
+            </li>
+        )
+    }
+}
+
+class CWNavbarStatusNewMenu extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = props.data;
+        this.openMenu = this.openMenu.bind(this);
+    }
+
+    openMenu() {
+        const { openMen = false } = this.state;
+        this.setState({openMen: !openMen});
+    }
+
+    render() {
+        const {openMen = false, newMenuItem} = this.state;
+        return (
+            <li className={"dropdown"} onClick={this.openMenu}>
+                <details class="dropdown-details">
+                    <summary>
+                        <svg aria-hidden="true" class="float-left mr-1 mt-1" height="16" version="1.1" viewBox="0 0 12 16" width="12">
+                            <path d="M12 9H7v5H5V9H0V7h5V2h2v5h5z"></path>
+                        </svg>
+                    </summary>
+                </details>
+                <CWNavbarStatusDropdownLink data={{openMen, newMenuItem}}/>
+            </li>
+        )
+    }
+}
+
 class CWNavbarStatus extends React.Component {
     constructor(props) {
         super(props)
     }
 
     render() {
+        const {newMenuItem = [
+            {name: "create image", href: "/image/create"},
+            {name: "run image as conditions", href: "/image/run/conditions"},
+            {name: "run images as service", href: "/image/run/service"}
+        ], profileMenuItem = [
+            {name: "show dashboard", href: "/service/dashboard"},
+            {name: "link info", href: "/linkInfo"}
+        ]} = this.props.data;
         return (
             <div class="collapse navbar-collapse">
                 <div class="d-flex">
                     <ul class="navbar-nav">
-                        <li class="dropdown js-menu-container">
+                        <li class="dropdown">
                             <span class="d-inline-block  px-2">
                             <a href="/notifications" aria-label="You have no unread notifications"
                                class="notification-indicator tooltipped tooltipped-s  js-socket-channel js-notification-indicator"
@@ -24,23 +110,8 @@ class CWNavbarStatus extends React.Component {
                             </a>
                             </span>
                         </li>
-                        <li class="dropdown js-menu-container">
-                            <details class="dropdown-details details-reset js-dropdown-details d-flex px-2 flex-items-center">
-                                <summary class="HeaderNavlink" aria-label="Create new…" data-ga-click="Header, create new, icon:add">
-                                    <svg aria-hidden="true" class="octicon octicon-plus float-left mr-1 mt-1" height="16" version="1.1" viewBox="0 0 12 16" width="12">
-                                        <path fill-rule="evenodd" d="M12 9H7v5H5V9H0V7h5V2h2v5h5z"></path>
-                                    </svg>
-                                </summary>
-                            </details>
-                        </li>
-                        <li class="dropdown js-menu-container">
-                            <details class="dropdown-details details-reset js-dropdown-details d-flex pl-2 flex-items-center">
-                                <summary class="HeaderNavlink name mt-1" aria-label="View profile and more" data-ga-click="Header, show menu, icon:avatar">
-                                    <img alt="@afterloe" class="avatar float-left mr-1" src="https://avatars0.githubusercontent.com/u/11550317?s=40&amp;v=4" height="20" width="20" />
-                                    <span class="dropdown-caret"></span>
-                                </summary>
-                            </details>
-                        </li>
+                        <CWNavbarStatusNewMenu data={{newMenuItem}}/>
+                        <CWNavbarStatusAvatarMenu data={{profileMenuItem}} />
                     </ul>
                 </div>
             </div>
@@ -91,8 +162,8 @@ class CWNavbarInputForm extends React.Component {
     render() {
         const {word = "Search"} = this.props.data || {};
         return (
-            <form className={"form-inline my-2 my-lg-0"}>
-                <input className={"form-control mr-sm-2"} type={"search"} placeholder={word}
+            <form className={"form-inline"}>
+                <input className={"form-control mr-sm-3"} type={"search"} placeholder={word}
                        aria-label={word}/>
             </form>
         )
@@ -110,13 +181,13 @@ class CWNavbar extends React.Component {
 
     render() {
         const {linkedHref = "/", name = "Cityworks™", cWNavbarInputForm = {},
-            cWNavbarRouters = {}} = this.props.data || {};
+            cWNavbarRouters = {}, barStatus = {}} = this.props.data || {};
         return (
             <nav className={"navbar navbar-expand-lg navbar-light"}>
                 <a className={"navbar-brand"} href={linkedHref}>{name}</a>
                 <CWNavbarInputForm data={cWNavbarInputForm}/>
                 <CWNavbarRouters data={cWNavbarRouters}/>
-                <CWNavbarStatus />
+                <CWNavbarStatus data={barStatus}/>
             </nav>
         )
     }
