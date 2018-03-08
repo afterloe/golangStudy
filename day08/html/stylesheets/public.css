@@ -1,5 +1,6 @@
 /* head */
 .cwWhete {display: -webkit-box; height: 0.5em; font-size: 2em;}
+.d-flex .navbar-nav .dropdown { margin-right: 5px; }
 .d-flex .navbar-nav .dropdown:nth-child(1) { padding-top: 5px; }
 .d-flex .navbar-nav .dropdown:nth-child(2) { padding-top: 4px; }
 
