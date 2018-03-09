@@ -47,6 +47,32 @@ const navbarData = {
                 href: "/others.html"
             }
         ]
+    },
+    barStatus: {
+        newMenuItem: [
+            {
+                name: "创建镜像",
+                href: "/image/create.html"
+            },
+            {
+                name: "创建容器",
+                href: "/image/runAsCondition.html"
+            },
+            {
+                name: "创建服务",
+                href: "/image/runAsService.html"
+            }
+        ],
+        profileMenuItem: [
+            {
+                name: "个人资料",
+                href: "/personal/info.html"
+            },
+            {
+                name: "报表",
+                href: "dashboard/personal.html"
+            }
+        ]
     }
 };
 
