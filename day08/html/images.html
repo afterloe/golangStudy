@@ -12,8 +12,8 @@
         <link rel="stylesheet" href="./stylesheets/lib/bootstrap.min.css">
     </head>
     <body>
+        <div id="nav"></div>
         <div class="container content">
-            <div id="nav"></div>
             <span class="cwWhete"></span>
             <div class="container structure">
                 <div id="root"></div>
@@ -28,6 +28,8 @@
     <link rel="stylesheet" href="./stylesheets/public.css">
     <style>
         .buttonList button { margin-right: 15px; }
-        .imagesView .card { width: 30%; }
+        .imagesView .card { max-width: 30%; min-width: 30%; }
+        .imagesView .card-deck { margin-top: 15px ; }
+        .card-body .btn-group { margin-left: 5px; }
     </style>
 </html>

@@ -14,59 +14,59 @@ class ButtonManager extends React.Component {
     }
 }
 
-class ImagesViews extends React.Component {
+class ImageItem extends React.Component {
     constructor(props) {
         super(props);
     }
 
     render() {
         return (
-            <div className={"card-deck"}>
-                <div class="card">
-                    <img class="card-img-top" src="../images/docker_image.jpg" alt="Card image cap" />
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
-                    </div>
-                    <div class="card-footer">
-                        <small class="text-muted">Last updated 3 mins ago</small>
-                    </div>
-                </div>
-                <div class="card">
-                    <img class="card-img-top" src="../images/docker_image.jpg" alt="Card image cap" />
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
-                    </div>
-                    <div class="card-footer">
-                        <small class="text-muted">Last updated 3 mins ago</small>
+            <div class="card">
+                <img class="card-img-top" src="../images/docker_image.jpg" alt="Card image cap" />
+                <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                    <div class="btn-group">
+                        <button type="button" className="btn btn-dark dropdown-toggle">
+                            Run With &nbsp;&nbsp;
+                        </button>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="#">Dropdown link</a>
+                            <a class="dropdown-item" href="#">Dropdown link</a>
+                        </div>
                     </div>
                 </div>
-                <div class="card">
-                    <img class="card-img-top" src="../images/docker_image.jpg" alt="Card image cap" />
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
-                    </div>
-                    <div class="card-footer">
-                        <small class="text-muted">Last updated 3 mins ago</small>
-                    </div>
+                <div class="card-footer">
+                    <small class="text-muted">Last updated 3 mins ago</small>
                 </div>
-                <div class="card">
-                    <img class="card-img-top" src="../images/docker_image.jpg" alt="Card image cap" />
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
-                    </div>
-                    <div class="card-footer">
-                        <small class="text-muted">Last updated 3 mins ago</small>
-                    </div>
-                </div>
+            </div>
+        )
+    }
+}
 
+class ImagesViews extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+
+    buildItemRanks(imageItems = []) {
+        return (
+            <div className={"card-deck"}>
+                {imageItems.map(item => <ImageItem />)}
+            </div>
+        )
+    }
+
+    render() {
+        const {imagesList = []} = this.props.data || {};
+        const ranks = [];
+        for (var i = 0, len = imagesList.length; i < len; i+=3) {
+            ranks.push(imagesList.slice(i, i + 3));
+        }
+        return (
+            <div className={"imagesView"}>
+                {ranks.map(rank => this.buildItemRanks(rank))}
             </div>
         )
     }
@@ -82,7 +82,7 @@ class ImagesManager extends React.Component {
             <div className={"imagesView"}>
                 <ButtonManager />
                 <span className={"cwWhete"}></span>
-                <ImagesViews />
+                <ImagesViews data={{imagesList: [1,2,3,4,5,6,7,8,9,10,11,12,13]}}/>
                 <span className={"cwWhete"}></span>
                 <span className={"cwWhete"}></span>
                 <nav aria-label="Page navigation example">
