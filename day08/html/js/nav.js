@@ -183,7 +183,7 @@ class CWNavbar extends React.Component {
         const {linkedHref = "/", name = "Cityworks™", cWNavbarInputForm = {},
             cWNavbarRouters = {}, barStatus = {}} = this.props.data || {};
         return (
-            <nav className={"navbar navbar-expand-lg navbar-light"}>
+            <nav className={"navbar navbar-expand-lg navbar-light container content"}>
                 <a className={"navbar-brand"} href={linkedHref}>{name}</a>
                 <CWNavbarInputForm data={cWNavbarInputForm}/>
                 <CWNavbarRouters data={cWNavbarRouters}/>

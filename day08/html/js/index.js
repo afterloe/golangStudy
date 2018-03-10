@@ -91,7 +91,7 @@ const navbarData = {
         newMenuItem: [
             {
                 name: "创建镜像",
-                href: "/image/create.html"
+                href: "/manager/create.html"
             },
             {
                 name: "创建容器",
