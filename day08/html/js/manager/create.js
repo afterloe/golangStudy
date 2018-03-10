@@ -12,7 +12,7 @@ class ViewStep extends React.Component {
                         <a class= {index === action ? "nav-link active": "nav-link disabled"} href="#">
                             <span class="badge badge-danger">{ index + 1 }</span>
                             <span>{ step || "unKnow step" }</span>
-                            </a>
+                        </a>
                     )
                 }
             </nav>
@@ -33,13 +33,33 @@ class UploadTarApp extends React.Component {
 
     uploadFile(event) {
         event.preventDefault();
+        const [xhr, formData, fileInstance] = [new XMLHttpRequest(), new FormData(), this.state.fileInstance];
+        formData.append("source", fileInstance);
+        xhr.open("POST", `/gateway/docker-me/v1/updateSource`, true);
+        xhr.send(formData);
+        xhr.onreadystatechange = () => {
+            if (4 === xhr.readyState) {
+                if (200 === xhr.status) {
+                    try {
+                        const result = JSON.parse(xhr.responseText);
+                        if (200 !== result.code) {
+                           // TODO
+                           console.log("load fail ... return code isn't 200 ");
+                            return ;
+                        }
+                    } catch(err) {
+                        console.log("load fail ... find some error");
+                    }
+                }
+                console.error("load fail ... xhr status isn't 200");
+            }
+        };
     }
 
     allowNext(event) {
         event.preventDefault();
         const [file] = event.target.files;
-        console.log(file);
-        this.setState({allowNextStep: true, fileInstead: file, word: file.name});
+        this.setState({allowNextStep: true, fileInstance: file, word: file.name});
     }
 
     formatTime(d = new Date()) {
@@ -53,33 +73,33 @@ class UploadTarApp extends React.Component {
     }
 
     buildFileInstead() {
-        const {fileInstead} = this.state;
+        const {fileInstance} = this.state;
         return (
            <div className={"fileInstead"}>
                <div class="form-group row">
                    <label class="col-sm-3 col-form-label">文件名</label>
                    <div class="col-sm-9">
-                       <input type="text" readonly class="form-control-plaintext" value={fileInstead.name}/>
+                       <input type="text" readonly class="form-control-plaintext" value={fileInstance.name}/>
                    </div>
                </div>
                <div class="form-group row">
                    <label class="col-sm-3 col-form-label">大小</label>
                    <div class="col-sm-9">
                        <input type="text" readonly class="form-control-plaintext"
-                              value={ this.formatSize(fileInstead.size) } />
+                              value={ this.formatSize(fileInstance.size) } />
                    </div>
                </div>
                <div class="form-group row">
                    <label class="col-sm-3 col-form-label">类型</label>
                    <div class="col-sm-9">
-                       <input type="text" readonly class="form-control-plaintext" value={fileInstead.type} />
+                       <input type="text" readonly class="form-control-plaintext" value={fileInstance.type} />
                    </div>
                </div>
                <div class="form-group row">
                    <label class="col-sm-3 col-form-label">上次修改时间</label>
                    <div class="col-sm-9">
                        <input type="text" readonly class="form-control-plaintext"
-                              value={this.formatTime(fileInstead.lastModifiedDate)} />
+                              value={this.formatTime(fileInstance.lastModifiedDate)} />
                    </div>
                </div>
            </div>
