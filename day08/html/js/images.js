@@ -6,9 +6,9 @@ class ButtonManager extends React.Component {
     render() {
         return (
             <div className={"buttonList"}>
-                <button type="button" class="btn btn-primary">构建</button>
-                <button type="button" class="btn btn-secondary">上传</button>
-                <button type="button" class="btn btn-dark">管理</button>
+                <a class="btn btn-primary" href={"/manager/create.html"}>构建</a>
+                <a class="btn btn-secondary" href={"/manager/update"}>上传</a>
+                <a class="btn btn-dark" href={"#"}>管理</a>
             </div>
         )
     }
@@ -140,7 +140,7 @@ const navbarData = {
         newMenuItem: [
             {
                 name: "创建镜像",
-                href: "/image/create.html"
+                href: "/manager/create.html"
             },
             {
                 name: "创建容器",
