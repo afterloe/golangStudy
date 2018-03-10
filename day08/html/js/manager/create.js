@@ -1,25 +1,55 @@
+class ViewStep extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+
+    render() {
+        const {steps = [], action = 0} = this.props.data;
+        return (
+            <nav class="nav">
+                {
+                    steps.map((step, index) =>
+                        <a class= {index === action ? "nav-link active": "nav-link disabled"} href="#">
+                            <span class="badge badge-danger">{ index + 1 }</span>
+                            <span>{ step || "unKnow step" }</span>
+                            </a>
+                    )
+                }
+            </nav>
+        )
+    }
+}
+
+class UploadTarApp extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+
+    render() {
+        return (
+            <div className={"uploadTar"}>
+                <form>
+                    <div class="form-group">
+                        <label for="selectUploadFile" className={"form-control-lg"}>选择tar包</label>
+                        <input type="file" class="form-control-file form-control-lg"
+                               aria-describedby="fileHelp" placeholder="请上传镜像包." />
+                    </div>
+                    <small class="text-muted">
+                        请上传使用tar.gz 格式压缩的tar包，否则将无法解压。tar包中请包含 dockerfile
+                    </small>
+                    <span className={"cwWhete"}></span>
+                    <button type="submit" class="btn btn-primary disabled float-right">下一步</button>
+                </form>
+            </div>
+        )
+    }
+}
+
 ReactDOM.render(
     <div className="createView">
-        <nav class="nav">
-            <a class="nav-link active" href="#"><span class="badge badge-danger">1</span> 上传tar包</a>
-            <a class="nav-link disabled" href="#"><span class="badge badge-danger">2</span> 构建</a>
-            <a class="nav-link disabled" href="#"><span class="badge badge-danger">3</span> 保存镜像</a>
-        </nav>
+        <ViewStep data={{steps: ["上传镜像压缩包", "构建镜像压缩包", "保存镜像信息"], action: 0}}/>
         <span className={"cwWhete"}></span>
-        <div className={"uploadTar"}>
-            <form>
-                <div class="form-group">
-                    <label for="selectUploadFile" className={"form-control-lg"}>选择tar包</label>
-                    <input type="file" class="form-control-file form-control-lg"
-                           aria-describedby="fileHelp" placeholder="请上传镜像包." />
-                </div>
-                <small class="text-muted">
-                    请上传使用tar.gz 格式压缩的tar包，否则将无法解压。tar包中请包含 dockerfile
-                </small>
-                <span className={"cwWhete"}></span>
-                <button type="submit" class="btn btn-primary disabled float-right">下一步</button>
-            </form>
-        </div>
+        <UploadTarApp />
     </div>
     , document.getElementById("root"));
 
