@@ -27,6 +27,12 @@
 <script type="text/babel" src="../js/manager/create.js"></script>
 <link rel="stylesheet" href="../stylesheets/public.css">
 <style>
+    .createView .active { cursor: default; }
+    .createView .disabled { cursor: not-allowed; }
+    .createView .nav a:after { content: "->"; color: #6c757d; margin-left: 15px; }
+    .createView .nav a:last-child:after { display: none; }
 
+    /*.uploadTar { margin-left: 50% }*/
+    .uploadTar form { max-width: 550px; margin: 30px auto; min-height: 700px; }
 </style>
 </html>
