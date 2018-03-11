@@ -12,7 +12,7 @@ class ViewStep extends React.Component {
                         <a class= {index === action ? "nav-link active": "nav-link disabled"} href="#">
                             <span class="badge badge-danger">{ index + 1 }</span>
                             <span>{ step || "unKnow step" }</span>
-                            </a>
+                        </a>
                     )
                 }
             </nav>
@@ -33,13 +33,35 @@ class UploadTarApp extends React.Component {
 
     uploadFile(event) {
         event.preventDefault();
+        const [xhr, formData, fileInstance] = [new XMLHttpRequest(), new FormData(), this.state.fileInstance];
+        formData.append("source", fileInstance);
+        xhr.open("POST", `/gateway/docker-me/v1/updateSource`, true);
+        xhr.send(formData);
+        xhr.onreadystatechange = () => {
+            if (4 === xhr.readyState) {
+                if (200 === xhr.status) {
+                    try {
+                        const result = JSON.parse(xhr.responseText);
+                        if (200 !== result.code) {
+                           // TODO
+                           console.log("load fail ... return code isn't 200 ");
+                            return ;
+                        }
+                    } catch(err) {
+                        console.log("load fail ... find some error");
+                    }
+                }
+                console.error("load fail ... xhr status isn't 200");
+            }
+        };
+        // TODO 只有上传成功之后才能进入下一步，这里想忽略掉
+        this.props.nextStep({msg: {fileName: fileInstance.name}, step: 0});
     }
 
     allowNext(event) {
         event.preventDefault();
         const [file] = event.target.files;
-        console.log(file);
-        this.setState({allowNextStep: true, fileInstead: file, word: file.name});
+        this.setState({allowNextStep: true, fileInstance: file, word: file.name});
     }
 
     formatTime(d = new Date()) {
@@ -53,33 +75,33 @@ class UploadTarApp extends React.Component {
     }
 
     buildFileInstead() {
-        const {fileInstead} = this.state;
+        const {fileInstance} = this.state;
         return (
            <div className={"fileInstead"}>
                <div class="form-group row">
                    <label class="col-sm-3 col-form-label">文件名</label>
                    <div class="col-sm-9">
-                       <input type="text" readonly class="form-control-plaintext" value={fileInstead.name}/>
+                       <input type="text" readonly class="form-control-plaintext" value={fileInstance.name}/>
                    </div>
                </div>
                <div class="form-group row">
                    <label class="col-sm-3 col-form-label">大小</label>
                    <div class="col-sm-9">
                        <input type="text" readonly class="form-control-plaintext"
-                              value={ this.formatSize(fileInstead.size) } />
+                              value={ this.formatSize(fileInstance.size) } />
                    </div>
                </div>
                <div class="form-group row">
                    <label class="col-sm-3 col-form-label">类型</label>
                    <div class="col-sm-9">
-                       <input type="text" readonly class="form-control-plaintext" value={fileInstead.type} />
+                       <input type="text" readonly class="form-control-plaintext" value={fileInstance.type} />
                    </div>
                </div>
                <div class="form-group row">
                    <label class="col-sm-3 col-form-label">上次修改时间</label>
                    <div class="col-sm-9">
                        <input type="text" readonly class="form-control-plaintext"
-                              value={this.formatTime(fileInstead.lastModifiedDate)} />
+                              value={this.formatTime(fileInstance.lastModifiedDate)} />
                    </div>
                </div>
            </div>
@@ -89,7 +111,7 @@ class UploadTarApp extends React.Component {
     render() {
         const {allowNextStep = false, word = "请选择资源包"} = this.state;
         return (
-            <div className={"uploadTar"}>
+            <div className={"UploadTarApp"}>
                 <form onSubmit={this.uploadFile}>
                     <div class="custom-file">
                         <input type="file" class="custom-file-input" onChange={this.allowNext} />
@@ -109,13 +131,94 @@ class UploadTarApp extends React.Component {
     }
 }
 
-ReactDOM.render(
-    <div className="createView">
-        <ViewStep data={{steps: ["上传镜像压缩包", "构建镜像压缩包", "保存镜像信息"], action: 0}}/>
-        <span className={"cwWhete"}></span>
-        <UploadTarApp />
-    </div>
-    , document.getElementById("root"));
+class StructureImageApp extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+
+    render() {
+        return (
+            <div className={"StructureImageApp"}>
+                <ul class="nav flex-column fileView">
+                    <li class="nav-link">Active</li>
+                    <li class="nav-link">Link</li>
+                    <li class="nav-link">Link</li>
+                    <li class="nav-link">
+                        <ul className="nav flex-column">
+                            <li class="nav-link">Active</li>
+                            <li class="nav-link">
+                                <ul className="nav flex-column">
+                                    <li class="nav-link">Active</li>
+                                    <li class="nav-link">Active</li>
+                                    <li class="nav-link">Active</li>
+                                </ul>
+                            </li>
+                            <li class="nav-link">Link</li>
+                        </ul>
+                    </li>
+                    <li class="nav-link">Link</li>
+                </ul>
+                <div className="controller">
+                    hello world
+                </div>
+            </div>
+        )
+    }
+}
+
+class SaveImageApp extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+
+    render() {
+        return (<div>hello world . saveImage .. </div>)
+    }
+}
+
+class CreateImageApp extends React.Component {
+    constructor(props) {
+        super(props);
+        this.nextStep = this.nextStep.bind(this);
+        this.state = {
+            actionStep: 1,
+            steps: ["上传镜像压缩包", "构建镜像压缩包", "保存镜像信息"]
+        };
+    }
+
+    nextStep({msg = {}, step = 0}) {
+        const {viewSteps} = this.state;
+        const [maxSteps = 0, nextStepAction] = [viewSteps.steps.length, step + 1];
+        viewSteps.action = nextStepAction >= maxSteps ? maxSteps: nextStepAction;
+        this.setState(viewSteps);
+    }
+
+    selectApp(actionStep = 0) {
+        switch (actionStep) {
+            case 0:
+                return (<UploadTarApp nextStep={this.nextStep} />);
+            case 1:
+                return (<StructureImageApp nextStep={this.nextStep} />);
+            case 2:
+                return (<SaveImageApp nextStep={this.nextStep} />);
+            default:
+                return;
+        }
+    }
+
+    render() {
+        const {steps = [], actionStep = 0} = this.state;
+        return (
+            <div className="createView">
+                <ViewStep data={{steps, action: actionStep}}/>
+                <span className={"cwWhete"}></span>
+                {this.selectApp(actionStep)}
+            </div>
+        )
+    }
+}
+
+ReactDOM.render( <CreateImageApp />, document.getElementById("root"));
 
 const navbarData = {
     linkedHref: "/",
