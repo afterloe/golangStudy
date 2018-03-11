@@ -129,13 +129,35 @@ class UploadTarApp extends React.Component {
     }
 }
 
-ReactDOM.render(
-    <div className="createView">
-        <ViewStep data={{steps: ["上传镜像压缩包", "构建镜像压缩包", "保存镜像信息"], action: 0}}/>
-        <span className={"cwWhete"}></span>
-        <UploadTarApp />
-    </div>
-    , document.getElementById("root"));
+class CreateImageApp extends React.Component {
+    constructor(props) {
+        super(props);
+        this.nextStep = this.nextStep.bind(this);
+        this.state = {
+            viewSteps: {
+                steps: ["上传镜像压缩包", "构建镜像压缩包", "保存镜像信息"],
+                action: 0
+            }
+        };
+    }
+
+    nextStep() {
+        console.log("123.com");
+    }
+
+    render() {
+        const {viewSteps = {}} = this.state;
+        return (
+            <div className="createView">
+                <ViewStep data={viewSteps}/>
+                <span className={"cwWhete"}></span>
+                <UploadTarApp />
+            </div>
+        )
+    }
+}
+
+ReactDOM.render( <CreateImageApp />, document.getElementById("root"));
 
 const navbarData = {
     linkedHref: "/",
