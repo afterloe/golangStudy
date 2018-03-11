@@ -54,6 +54,8 @@ class UploadTarApp extends React.Component {
                 console.error("load fail ... xhr status isn't 200");
             }
         };
+        // TODO 只有上传成功之后才能进入下一步，这里想忽略掉
+        this.props.nextStep({msg: {fileName: fileInstance.name}, step: 0});
     }
 
     allowNext(event) {
@@ -141,8 +143,11 @@ class CreateImageApp extends React.Component {
         };
     }
 
-    nextStep() {
-        console.log("123.com");
+    nextStep({msg = {}, step = 0}) {
+        const {viewSteps} = this.state;
+        const [maxSteps = 0, nextStepAction] = [viewSteps.steps.length, step + 1];
+        viewSteps.action = nextStepAction >= maxSteps ? maxSteps: nextStepAction;
+        this.setState(viewSteps);
     }
 
     render() {
@@ -151,7 +156,7 @@ class CreateImageApp extends React.Component {
             <div className="createView">
                 <ViewStep data={viewSteps}/>
                 <span className={"cwWhete"}></span>
-                <UploadTarApp />
+                <UploadTarApp nextStep={this.nextStep} />
             </div>
         )
     }
