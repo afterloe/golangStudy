@@ -111,7 +111,7 @@ class UploadTarApp extends React.Component {
     render() {
         const {allowNextStep = false, word = "请选择资源包"} = this.state;
         return (
-            <div className={"uploadTar"}>
+            <div className={"UploadTarApp"}>
                 <form onSubmit={this.uploadFile}>
                     <div class="custom-file">
                         <input type="file" class="custom-file-input" onChange={this.allowNext} />
@@ -137,7 +137,32 @@ class StructureImageApp extends React.Component {
     }
 
     render() {
-        return (<div>hello world .</div>)
+        return (
+            <div className={"StructureImageApp"}>
+                <ul class="nav flex-column fileView">
+                    <li class="nav-link">Active</li>
+                    <li class="nav-link">Link</li>
+                    <li class="nav-link">Link</li>
+                    <li class="nav-link">
+                        <ul className="nav flex-column">
+                            <li class="nav-link">Active</li>
+                            <li class="nav-link">
+                                <ul className="nav flex-column">
+                                    <li class="nav-link">Active</li>
+                                    <li class="nav-link">Active</li>
+                                    <li class="nav-link">Active</li>
+                                </ul>
+                            </li>
+                            <li class="nav-link">Link</li>
+                        </ul>
+                    </li>
+                    <li class="nav-link">Link</li>
+                </ul>
+                <div className="controller">
+                    hello world
+                </div>
+            </div>
+        )
     }
 }
 
