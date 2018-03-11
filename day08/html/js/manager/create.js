@@ -131,15 +131,33 @@ class UploadTarApp extends React.Component {
     }
 }
 
+class StructureImageApp extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+
+    render() {
+        return (<div>hello world .</div>)
+    }
+}
+
+class SaveImageApp extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+
+    render() {
+        return (<div>hello world . saveImage .. </div>)
+    }
+}
+
 class CreateImageApp extends React.Component {
     constructor(props) {
         super(props);
         this.nextStep = this.nextStep.bind(this);
         this.state = {
-            viewSteps: {
-                steps: ["上传镜像压缩包", "构建镜像压缩包", "保存镜像信息"],
-                action: 0
-            }
+            actionStep: 1,
+            steps: ["上传镜像压缩包", "构建镜像压缩包", "保存镜像信息"]
         };
     }
 
@@ -150,13 +168,26 @@ class CreateImageApp extends React.Component {
         this.setState(viewSteps);
     }
 
+    selectApp(actionStep = 0) {
+        switch (actionStep) {
+            case 0:
+                return (<UploadTarApp nextStep={this.nextStep} />);
+            case 1:
+                return (<StructureImageApp nextStep={this.nextStep} />);
+            case 2:
+                return (<SaveImageApp nextStep={this.nextStep} />);
+            default:
+                return;
+        }
+    }
+
     render() {
-        const {viewSteps = {}} = this.state;
+        const {steps = [], actionStep = 0} = this.state;
         return (
             <div className="createView">
-                <ViewStep data={viewSteps}/>
+                <ViewStep data={{steps, action: actionStep}}/>
                 <span className={"cwWhete"}></span>
-                <UploadTarApp nextStep={this.nextStep} />
+                {this.selectApp(actionStep)}
             </div>
         )
     }
