@@ -140,23 +140,32 @@ class StructureImageApp extends React.Component {
         return (
             <div className={"StructureImageApp"}>
                 <ul class="nav flex-column fileView">
-                    <li class="nav-link">Active</li>
-                    <li class="nav-link">Link</li>
-                    <li class="nav-link">Link</li>
                     <li class="nav-link">
+                        <span className="glyphicon glyphicon-folder-open"></span>
+                        /tmp/timeandspace-platform
                         <ul className="nav flex-column">
-                            <li class="nav-link">Active</li>
                             <li class="nav-link">
-                                <ul className="nav flex-column">
-                                    <li class="nav-link">Active</li>
-                                    <li class="nav-link">Active</li>
-                                    <li class="nav-link">Active</li>
-                                </ul>
+                                <span className="glyphicon glyphicon-file"></span>
+                                Dockerfile
                             </li>
-                            <li class="nav-link">Link</li>
+                            <li class="nav-link">
+                                <span className="glyphicon glyphicon-file"></span>
+                                application.yml
+                            </li>
+                            <li class="nav-link">
+                                <span className="glyphicon glyphicon-file"></span>
+                                docker-entrypoint.sh
+                            </li>
+                            <li class="nav-link">
+                                <span className="glyphicon glyphicon-file"></span>
+                                timeandspace-platform-2.0.7.jar
+                            </li>
+                            <li class="nav-link">
+                                <span className="glyphicon glyphicon-folder-close"></span>
+                                static
+                            </li>
                         </ul>
                     </li>
-                    <li class="nav-link">Link</li>
                 </ul>
                 <div className="controller">
                     hello world
