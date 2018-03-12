@@ -131,6 +131,31 @@ class UploadTarApp extends React.Component {
     }
 }
 
+class StructureImageControllerApp extends React.Component {
+
+    constructor(props) {
+        super(props);
+    }
+
+    render() {
+        return (
+            <div className="controller">
+                <button type="button" className="btn btn-danger" onClick={
+                    event => this.props.lastStep({msg: null, step: 1})
+                }>上一步</button>
+                <button type="button" className="btn btn-dark disabled" onClick={
+                    event => {
+                        const flag = event.target.getAttribute("class").includes("disabled");
+                        if (!flag) {
+                            this.props.nextStep({msg: null, step: 1});
+                        }
+                    }
+                }>开始构建 >></button>
+            </div>
+        )
+    }
+}
+
 class StructureImageApp extends React.Component {
     constructor(props) {
         super(props);
@@ -167,9 +192,7 @@ class StructureImageApp extends React.Component {
                         </ul>
                     </li>
                 </ul>
-                <div className="controller">
-                    hello world
-                </div>
+                <StructureImageControllerApp nextStep={this.props.nextStep} lastStep={this.props.lastStep} />
             </div>
         )
     }
@@ -189,6 +212,7 @@ class CreateImageApp extends React.Component {
     constructor(props) {
         super(props);
         this.nextStep = this.nextStep.bind(this);
+        this.lastStep = this.lastStep.bind(this);
         this.state = {
             actionStep: 1,
             steps: ["上传镜像压缩包", "构建镜像压缩包", "保存镜像信息"]
@@ -196,10 +220,14 @@ class CreateImageApp extends React.Component {
     }
 
     nextStep({msg = {}, step = 0}) {
-        const {viewSteps} = this.state;
-        const [maxSteps = 0, nextStepAction] = [viewSteps.steps.length, step + 1];
-        viewSteps.action = nextStepAction >= maxSteps ? maxSteps: nextStepAction;
-        this.setState(viewSteps);
+        const {steps} = this.state;
+        const [maxSteps = 0, nextStepAction] = [steps.length, step + 1];
+        this.setState({actionStep: nextStepAction >= maxSteps ? maxSteps: nextStepAction});
+    }
+
+    lastStep({msg = {}, step = 0}) {
+        const lastStepAction = step - 1;
+        this.setState({actionStep: lastStepAction <= 0 ? 0: lastStepAction});
     }
 
     selectApp(actionStep = 0) {
@@ -207,9 +235,9 @@ class CreateImageApp extends React.Component {
             case 0:
                 return (<UploadTarApp nextStep={this.nextStep} />);
             case 1:
-                return (<StructureImageApp nextStep={this.nextStep} />);
+                return (<StructureImageApp nextStep={this.nextStep} lastStep={this.lastStep} />);
             case 2:
-                return (<SaveImageApp nextStep={this.nextStep} />);
+                return (<SaveImageApp nextStep={this.nextStep} lastStep={this.lastStep} />);
             default:
                 return;
         }
