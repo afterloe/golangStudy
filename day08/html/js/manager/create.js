@@ -140,6 +140,20 @@ class StructureImageControllerApp extends React.Component {
     render() {
         return (
             <div className="controller">
+                <form>
+                    <div class="form-group row">
+                        <label for="staticEmail" class="col-sm-2 col-form-label">镜像名</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" value="timeandspace-platform" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="staticEmail" class="col-sm-2 col-form-label">版本</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" value="2.0.7" />
+                        </div>
+                    </div>
+                </form>
                 <button type="button" className="btn btn-danger" onClick={
                     event => this.props.lastStep({msg: null, step: 1})
                 }>上一步</button>
@@ -204,7 +218,48 @@ class SaveImageApp extends React.Component {
     }
 
     render() {
-        return (<div>hello world . saveImage .. </div>)
+        return (
+            <div className="SaveImageApp">
+                <form>
+                    <div class="form-group row">
+                        <label for="staticEmail" class="col-sm-2 col-form-label">镜像名</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control-plaintext" readonly value="timeandspace-platform" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="staticEmail" class="col-sm-2 col-form-label">版本</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control-plaintext" readonly value="2.0.7" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="staticEmail" class="col-sm-2 col-form-label">创建人</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control-plaintext" readonly value="afterloe" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="staticEmail" class="col-sm-2 col-form-label">大小</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control-plaintext" readonly value="139 Mb" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="staticEmail" class="col-sm-2 col-form-label">创建日期</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control-plaintext" readonly value="2018-3-12 18:20:44" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-12">
+                            <button className="btn btn-danger" style={{width: "100%", "margin-bottom": "5px"}}>上一步</button>
+                            <button className="btn btn-dark" style={{width: "100%"}}>保存 & 关闭</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        )
     }
 }
 
