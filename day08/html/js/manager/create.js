@@ -1,3 +1,6 @@
+/**
+ * 构建步骤 app 头部 流程控制和显示
+ */
 class ViewStep extends React.Component {
     constructor(props) {
         super(props);
@@ -20,6 +23,9 @@ class ViewStep extends React.Component {
     }
 }
 
+/**
+ * 上传镜像资源包应用 负责上传资源包
+ */
 class UploadTarApp extends React.Component {
     constructor(props) {
         super(props);
@@ -33,6 +39,10 @@ class UploadTarApp extends React.Component {
 
     uploadFile(event) {
         event.preventDefault();
+        const {allowNextStep = false} = this.state;
+        if (!allowNextStep) {
+            return ;
+        }
         const [xhr, formData, fileInstance] = [new XMLHttpRequest(), new FormData(), this.state.fileInstance];
         formData.append("source", fileInstance);
         xhr.open("POST", `/gateway/docker-me/v1/updateSource`, true);
@@ -131,6 +141,55 @@ class UploadTarApp extends React.Component {
     }
 }
 
+/**
+ * 构建镜像应用 镜像上来之后，解压 使用docker build 命令进行build 镜像操作输入基本参数信息
+ *
+ * 右侧控制面板
+ */
+class StructureImageControllerApp extends React.Component {
+
+    constructor(props) {
+        super(props);
+    }
+
+    render() {
+        return (
+            <div className="controller">
+                <form>
+                    <div class="form-group row">
+                        <label for="staticEmail" class="col-sm-2 col-form-label">镜像名</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" value="timeandspace-platform" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="staticEmail" class="col-sm-2 col-form-label">版本</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" value="2.0.7" />
+                        </div>
+                    </div>
+                </form>
+                <button type="button" className="btn btn-danger" onClick={
+                    event => this.props.lastStep({msg: null, step: 1})
+                }>上一步</button>
+                <button type="button" className="btn btn-dark" onClick={
+                    event => {
+                        const flag = event.target.getAttribute("class").includes("disabled");
+                        if (!flag) {
+                            this.props.nextStep({msg: null, step: 1});
+                        }
+                    }
+                }>开始构建 >></button>
+            </div>
+        )
+    }
+}
+
+/**
+ * 构建镜像应用 镜像上来之后，解压 使用docker build 命令进行build 镜像操作输入基本参数信息
+ *
+ * 左侧 文件树
+ */
 class StructureImageApp extends React.Component {
     constructor(props) {
         super(props);
@@ -140,57 +199,117 @@ class StructureImageApp extends React.Component {
         return (
             <div className={"StructureImageApp"}>
                 <ul class="nav flex-column fileView">
-                    <li class="nav-link">Active</li>
-                    <li class="nav-link">Link</li>
-                    <li class="nav-link">Link</li>
                     <li class="nav-link">
+                        <span className="glyphicon glyphicon-folder-open"></span>
+                        /tmp/timeandspace-platform
                         <ul className="nav flex-column">
-                            <li class="nav-link">Active</li>
                             <li class="nav-link">
-                                <ul className="nav flex-column">
-                                    <li class="nav-link">Active</li>
-                                    <li class="nav-link">Active</li>
-                                    <li class="nav-link">Active</li>
-                                </ul>
+                                <span className="glyphicon glyphicon-file"></span>
+                                Dockerfile
                             </li>
-                            <li class="nav-link">Link</li>
+                            <li class="nav-link">
+                                <span className="glyphicon glyphicon-file"></span>
+                                application.yml
+                            </li>
+                            <li class="nav-link">
+                                <span className="glyphicon glyphicon-file"></span>
+                                docker-entrypoint.sh
+                            </li>
+                            <li class="nav-link">
+                                <span className="glyphicon glyphicon-file"></span>
+                                timeandspace-platform-2.0.7.jar
+                            </li>
+                            <li class="nav-link">
+                                <span className="glyphicon glyphicon-folder-close"></span>
+                                static
+                            </li>
                         </ul>
                     </li>
-                    <li class="nav-link">Link</li>
                 </ul>
-                <div className="controller">
-                    hello world
-                </div>
+                <StructureImageControllerApp nextStep={this.props.nextStep} lastStep={this.props.lastStep} />
             </div>
         )
     }
 }
 
+/**
+ * 保存镜像
+ */
 class SaveImageApp extends React.Component {
     constructor(props) {
         super(props);
     }
 
     render() {
-        return (<div>hello world . saveImage .. </div>)
+        return (
+            <div className="SaveImageApp">
+                <form>
+                    <div class="form-group row">
+                        <label for="staticEmail" class="col-sm-2 col-form-label">镜像名</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control-plaintext" readonly value="timeandspace-platform" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="staticEmail" class="col-sm-2 col-form-label">版本</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control-plaintext" readonly value="2.0.7" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="staticEmail" class="col-sm-2 col-form-label">创建人</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control-plaintext" readonly value="afterloe" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="staticEmail" class="col-sm-2 col-form-label">大小</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control-plaintext" readonly value="139 Mb" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="staticEmail" class="col-sm-2 col-form-label">创建日期</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control-plaintext" readonly value="2018-3-12 18:20:44" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-12">
+                            <button className="btn btn-dark">保存 & 关闭</button>
+                            <button className="btn btn-danger"
+                                    onClick={event => this.props.lastStep({msg: null, step: 2})}>上一步</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        )
     }
 }
 
+/**
+ * 创建镜像主app
+ */
 class CreateImageApp extends React.Component {
     constructor(props) {
         super(props);
         this.nextStep = this.nextStep.bind(this);
+        this.lastStep = this.lastStep.bind(this);
         this.state = {
-            actionStep: 1,
+            actionStep: 2,
             steps: ["上传镜像压缩包", "构建镜像压缩包", "保存镜像信息"]
         };
     }
 
     nextStep({msg = {}, step = 0}) {
-        const {viewSteps} = this.state;
-        const [maxSteps = 0, nextStepAction] = [viewSteps.steps.length, step + 1];
-        viewSteps.action = nextStepAction >= maxSteps ? maxSteps: nextStepAction;
-        this.setState(viewSteps);
+        const {steps} = this.state;
+        const [maxSteps = 0, nextStepAction] = [steps.length, step + 1];
+        this.setState({actionStep: nextStepAction >= maxSteps ? maxSteps: nextStepAction});
+    }
+
+    lastStep({msg = {}, step = 0}) {
+        const lastStepAction = step - 1;
+        this.setState({actionStep: lastStepAction <= 0 ? 0: lastStepAction});
     }
 
     selectApp(actionStep = 0) {
@@ -198,9 +317,9 @@ class CreateImageApp extends React.Component {
             case 0:
                 return (<UploadTarApp nextStep={this.nextStep} />);
             case 1:
-                return (<StructureImageApp nextStep={this.nextStep} />);
+                return (<StructureImageApp nextStep={this.nextStep} lastStep={this.lastStep} />);
             case 2:
-                return (<SaveImageApp nextStep={this.nextStep} />);
+                return (<SaveImageApp nextStep={this.nextStep} lastStep={this.lastStep} />);
             default:
                 return;
         }
@@ -218,8 +337,16 @@ class CreateImageApp extends React.Component {
     }
 }
 
+/**
+ * 渲染
+ */
 ReactDOM.render( <CreateImageApp />, document.getElementById("root"));
 
+/**
+ * 导航栏配置文件
+ *
+ * @type {{linkedHref: string, name: string, cWNavbarInputForm: {word: string}, cWNavbarRouters: {activeRouter: number, routers: *[]}, barStatus: {newMenuItem: *[], profileMenuItem: *[]}}}
+ */
 const navbarData = {
     linkedHref: "/",
     name: "Cityworks™ 云平台",
