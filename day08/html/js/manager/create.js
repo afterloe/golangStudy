@@ -1,3 +1,6 @@
+/**
+ * 构建步骤 app 头部 流程控制和显示
+ */
 class ViewStep extends React.Component {
     constructor(props) {
         super(props);
@@ -20,6 +23,9 @@ class ViewStep extends React.Component {
     }
 }
 
+/**
+ * 上传镜像资源包应用 负责上传资源包
+ */
 class UploadTarApp extends React.Component {
     constructor(props) {
         super(props);
@@ -33,6 +39,10 @@ class UploadTarApp extends React.Component {
 
     uploadFile(event) {
         event.preventDefault();
+        const {allowNextStep = false} = this.state;
+        if (!allowNextStep) {
+            return ;
+        }
         const [xhr, formData, fileInstance] = [new XMLHttpRequest(), new FormData(), this.state.fileInstance];
         formData.append("source", fileInstance);
         xhr.open("POST", `/gateway/docker-me/v1/updateSource`, true);
@@ -131,6 +141,11 @@ class UploadTarApp extends React.Component {
     }
 }
 
+/**
+ * 构建镜像应用 镜像上来之后，解压 使用docker build 命令进行build 镜像操作输入基本参数信息
+ *
+ * 右侧控制面板
+ */
 class StructureImageControllerApp extends React.Component {
 
     constructor(props) {
@@ -170,6 +185,11 @@ class StructureImageControllerApp extends React.Component {
     }
 }
 
+/**
+ * 构建镜像应用 镜像上来之后，解压 使用docker build 命令进行build 镜像操作输入基本参数信息
+ *
+ * 左侧 文件树
+ */
 class StructureImageApp extends React.Component {
     constructor(props) {
         super(props);
@@ -212,6 +232,9 @@ class StructureImageApp extends React.Component {
     }
 }
 
+/**
+ * 保存镜像
+ */
 class SaveImageApp extends React.Component {
     constructor(props) {
         super(props);
@@ -264,6 +287,9 @@ class SaveImageApp extends React.Component {
     }
 }
 
+/**
+ * 创建镜像主app
+ */
 class CreateImageApp extends React.Component {
     constructor(props) {
         super(props);
@@ -311,8 +337,16 @@ class CreateImageApp extends React.Component {
     }
 }
 
+/**
+ * 渲染
+ */
 ReactDOM.render( <CreateImageApp />, document.getElementById("root"));
 
+/**
+ * 导航栏配置文件
+ *
+ * @type {{linkedHref: string, name: string, cWNavbarInputForm: {word: string}, cWNavbarRouters: {activeRouter: number, routers: *[]}, barStatus: {newMenuItem: *[], profileMenuItem: *[]}}}
+ */
 const navbarData = {
     linkedHref: "/",
     name: "Cityworks™ 云平台",
