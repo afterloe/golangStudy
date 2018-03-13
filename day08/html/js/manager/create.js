@@ -157,7 +157,7 @@ class StructureImageControllerApp extends React.Component {
                 <button type="button" className="btn btn-danger" onClick={
                     event => this.props.lastStep({msg: null, step: 1})
                 }>上一步</button>
-                <button type="button" className="btn btn-dark disabled" onClick={
+                <button type="button" className="btn btn-dark" onClick={
                     event => {
                         const flag = event.target.getAttribute("class").includes("disabled");
                         if (!flag) {
@@ -253,8 +253,9 @@ class SaveImageApp extends React.Component {
                     </div>
                     <div class="form-group row">
                         <div class="col-sm-12">
-                            <button className="btn btn-danger" style={{width: "100%", "margin-bottom": "5px"}}>上一步</button>
-                            <button className="btn btn-dark" style={{width: "100%"}}>保存 & 关闭</button>
+                            <button className="btn btn-dark">保存 & 关闭</button>
+                            <button className="btn btn-danger"
+                                    onClick={event => this.props.lastStep({msg: null, step: 2})}>上一步</button>
                         </div>
                     </div>
                 </form>
@@ -269,7 +270,7 @@ class CreateImageApp extends React.Component {
         this.nextStep = this.nextStep.bind(this);
         this.lastStep = this.lastStep.bind(this);
         this.state = {
-            actionStep: 1,
+            actionStep: 2,
             steps: ["上传镜像压缩包", "构建镜像压缩包", "保存镜像信息"]
         };
     }
