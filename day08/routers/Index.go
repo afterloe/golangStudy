@@ -9,4 +9,5 @@ func Execute(route *gin.RouterGroup) {
 	route.GET("/", Home)
 	route.GET("/images", images.ListImage)
 	route.POST("/images", Home)
+	route.POST("/images/load", Home)
 }
