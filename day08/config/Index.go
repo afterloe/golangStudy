@@ -20,6 +20,9 @@ func checkError(err error) {
 	}
 }
 
+/**
+ *  获取代码运行目录
+ */
 func getCurrentDirectory() string {
 	dir, err := filepath.Abs(filepath.Dir(os.Args[0]))
 	if err != nil {
