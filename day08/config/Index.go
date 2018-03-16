@@ -31,6 +31,9 @@ func getCurrentDirectory() string {
 	return strings.Replace(dir, "\\", "/", -1)
 }
 
+/**
+ * 初始化包函数
+ */
 func init() {
 	dir := getCurrentDirectory()
 	configInfo, err := util.ReadRealFile(filepath.Join(dir, "./package.json"))
@@ -43,6 +46,12 @@ func init() {
 	packageJson = pkg
 }
 
+/**
+ * 获取配置项
+ *
+ * @param key string 配置项key
+ * @return interface{} 配置内容
+ */
 func Get(key string) interface{} {
 	return packageJson[key]
 }
