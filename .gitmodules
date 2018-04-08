@@ -1,0 +1,3 @@
+[submodule "day08-project"]
+	path = day08-project
+	url = https://github.com/afterloe/awpaas-manager
