@@ -40,6 +40,6 @@ golang day08中的项目已经单独立项了，可以关注 https://github.com/
     * 调用docker api 构建一个SOA服务管理平台
     * 接入java eureka 调度eureka中的其他服务
     * docker 封装go的服务实现ci
-* [第九天](day09/index.md)
-    * go中的区块链技术研究
+* [第九天](day09_project/index.md)
+    * SOA前置数据网关
 
