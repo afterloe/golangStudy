@@ -1,3 +1,6 @@
 [submodule "day08-project"]
 	path = day08-project
 	url = https://github.com/afterloe/awpaas-manager
+[submodule "day09-project"]
+	path = day09-project
+	url = https://github.com/afterloe/awpaas-route
