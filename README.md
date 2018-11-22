@@ -35,11 +35,13 @@ golang day08中的项目已经单独立项了，可以关注 https://github.com/
     * 单元测试
     * 压力、性能测试
     * mock 测试
-* [第八天](day08_index.md)
+* [第八天](https://github.com/afterloe/awpaas-manager)
     * [实战 - 使用gin构建web基础框架](day08_framework.md)
     * 调用docker api 构建一个SOA服务管理平台
-    * 接入java eureka 调度eureka中的其他服务
     * docker 封装go的服务实现ci
-* [第九天](day09_project/index.md)
+* [第九天](https://github.com/afterloe/awpaas-route)
     * SOA前置数据网关
+    * 自定义黑白名单
+    * 链接docker service 获取服务列表
+    * 使用docker swarm 网络实现服务负载均衡
 
