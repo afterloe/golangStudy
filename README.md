@@ -36,6 +36,8 @@ golang day08中的项目已经单独立项了，可以关注 https://github.com/
     * 压力、性能测试
     * mock 测试
 * [第八天](https://github.com/afterloe/awpaas-manager)
+    * 构建通用go打包镜像
+    * 构建软件镜像
     * [实战 - 使用gin构建web基础框架](day08_framework.md)
     * 调用docker api 构建一个SOA服务管理平台
     * docker 封装go的服务实现ci
