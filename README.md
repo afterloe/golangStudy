@@ -1,12 +1,13 @@
 # go语言学习笔记
 
 > create by afterloe <lm6289511@gmail.com>  
-> version is 0.0.1  
+> version is 1.1  
 > apache 2.0  
 
 golang 教程 学习笔记&开发日记
 
 golang day08中的项目已经单独立项了，可以关注 https://github.com/afterloe/AwPaas 下的 https://github.com/afterloe/awpaas-manager 项目
+> 时隔半年继续更新，用go做了一个项目，将项目中碰到的点滴分享一下。将原来的第七天的内容改为了udp，第九天增加了c++扩展, 具体目录如下
 
 * [目录](README.md)
 * [第一天](day01/index.md)
@@ -32,19 +33,27 @@ golang day08中的项目已经单独立项了，可以关注 https://github.com/
     * 自定义路由
     * 文件上传
 * [第七天](day07/index.md)
+    * udp服务
+    * udp客户端
+    * 远程命令控制
+* [第八天](day08/index.md)
     * 单元测试
     * 压力、性能测试
     * mock 测试
-* [第八天](https://github.com/afterloe/awpaas-manager)
+* [第九天](day09/index.md)
+    * c++拓展
+    * opencv 应用
+    * 图像识别探索
+* [第十天](https://github.com/afterloe/awpaas-manager)
     * [构建通用go打包镜像](https://github.com/afterloe/AwPaas/tree/master/awpaas-builder)
     * [构建打包工具打包成docker镜像](https://github.com/afterloe/awpaas-route/blob/master/Makefile)
     * [实战 - 使用gin构建web基础框架](day08_framework.md)
     * 调用docker api 构建一个SOA服务管理平台
     * docker 封装go的服务实现ci
-* [第九天（实战） 前置数据网关](https://github.com/afterloe/awpaas-route)
+* [第十一天（实战） 前置数据网关](https://github.com/afterloe/awpaas-route)
     * SOA前置数据网关
     * 自定义黑白名单
     * 链接docker service 获取服务列表
     * 使用docker swarm 网络实现服务负载均衡
-* [第十天（实战） Docker 增量维护](https://github.com/afterloe/awpaas-repository)
+* [第十二天（实战） Docker 增量维护](https://github.com/afterloe/awpaas-repository)
     * 链接CouchDB
