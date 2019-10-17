@@ -10,6 +10,7 @@
 golang day08中的项目已经单独立项了，可以关注 https://github.com/afterloe/AwPaas 下的 https://github.com/afterloe/awpaas-manager 项目
 > 时隔半年继续更新，用go做了一个项目，将项目中碰到的点滴分享一下。将原来的第七天的内容改为了udp，第九天增加了c++扩展, 具体目录如下
 
+直接阅读点(这里)[./SUMMARY.md]
 * [目录](README.md)
 * [第一天](day01/index.md)
     * 变量
