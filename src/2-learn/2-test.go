@@ -46,14 +46,16 @@ func main() {
 	me.mail = "lm6289511@gmail.com"
 	me.age = 24
 
-	// 第二种使用方式 // 这种必须要补全 - 否则会报错
+	// 第二种使用方式，这种必须要补全 - 否则会报错
 	he := person{"afterloe.L","lm6289511@gmail.com", 21}
 	personToString(&he) // 打印出person的内容
 
-	// 第三种
-	he2 := person{name:"afterloe.L", mail: "lm6289511@gmail.com", age: 17}
+	// 第三种，可以缺省
+	he2 := person{mail: "lm6289511@gmail.com", age: 17}
 	older := olderMan(&he, &he2) // 注意这里返回的是 person 的指针
 	personToString(older)
+
+
 	older.age = 4 // 指针修改的是 执行的内容，如果发生修改 所有的东西都进行了修改的
 	personToString(&he)
 

@@ -1,6 +1,6 @@
 # 结构体 struct
 
-> 代码链接 [./Main2.go](./Main2.go)
+> 代码链接 [./2-test.go](./2-test.go)
 
 struct不仅能将struct作为匿名字段，自定义类型、内置类型都可以作为匿名字段，而且可以在相应的字段上进行函数操作
 
@@ -23,3 +23,7 @@ type developer struct {
 ```
 
 具体可以参考源代码的内容
+
+指针返回内容如`func olderMan(p1, p2 *person) (older *person)`, 详见[2-test.go](./2-test.go)  
+
+    

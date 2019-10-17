@@ -1,6 +1,19 @@
 # 第二天
 
-> 代码链接 [./Main.go](./Main.go)
+> 代码链接 [./1-test.go](./1-test.go)
+
+函数 定义如下
+
+```
+	func funcName(input1 type, input2 type) (output1 type, output2 type) {
+		// ... do something
+		return value1, value2
+	}
+```
+go里面可以为函数的返回值申明变量，当然这种写法也是可以的
+`func funcName(input1 type, input2 type) (type, type) {}`
+
+* ps: golang 没有三元表达式~~
 
 defer 延迟(defer)语句，你可以在函数中添加多个defer语句。当函数执行到最后时，这些defer语句会 按照逆序执行，最后该函数返回进行一些打开资源的操作时，遇到错误需要提前返回，在返回前你需要关闭相应的 资源，不然很容易造成资源泄露等问题
 
@@ -33,7 +46,7 @@ func readFile() bool {
  	return true;
  }
 ```
-如果有很多调用defer，那么defer是采用后进先出模式
+如果有很多调用defer，那么defer是采用后进先出的方式执行
 ```golang
 func mockReadFile() {
 	fmt.Println("打开文件")

@@ -15,24 +15,23 @@ import "fmt"
 	func funcName(input1 type, input2 type) (type, type) {
 	如果没有返回值 可以忽略 return、有的话 必须写上 return
  */
- func sum(a, b int) int {
- 	return a + b
- }
-
+func sum(a, b int) int {
+    return a + b
+}
 
  /**
  	多参数返回, 简写
   */
- func sumAndMax(a, b int) (int, int) {
- 	max := 0
- 	if a > b {
- 		max = a
-	} else {
- 		max = b
- 	}
+func sumAndMax(a, b int) (int, int) {
+    max := 0
+    if a > b {
+        max = a
+    } else {
+        max = b
+    }
 
- 	return sum(a, b), max
- }
+    return sum(a, b), max
+}
  /**
  	官方建议
 func sumAndMax2(a, b int)(sum int, max int)  {
