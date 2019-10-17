@@ -4,17 +4,21 @@
 > version is 1.3  
 > MIT License    
 
-## golang 教程 学习笔记&开发日记
+## 目录
+<a href="#1">笔记</a>  
+<a href="#2">备忘录</a>  
 
-### 笔记
+## golang 教程 学习笔记&开发日记
+golang 开发的规范请参考(官方的标准)[https://github.com/golang/go/wiki/CodeReviewComments]
+
+### <a name="#1">笔记</a>
 golang day08中的项目已经单独立项了，可以关注 https://github.com/afterloe/AwPaas 下的 https://github.com/afterloe/awpaas-manager 项目
 > 时隔半年继续更新，用go做了一个项目，将项目中碰到的点滴分享一下。将原来的第七天的内容改为了udp，第九天增加了c++扩展, 具体目录如下
 
-直接阅读点(这里)[./SUMMARY.md]
-* [目录](README.md)
-* [第一天](day01/index.md)
-    * 变量
-    * map & slice
+直接阅读点[这里](./SUMMARY.md)
+* [第一天](./src/1-learn/summary.md)
+    * 变量、常量
+    * map & slice 的初始化及使用
     * make & new 以及默认值
 * [第二天](day02/index.md)
     * 函数、流程、goto、循环
@@ -47,8 +51,10 @@ golang day08中的项目已经单独立项了，可以关注 https://github.com/
     * opencv 应用
     * 图像识别探索
 * [第十天](https://github.com/afterloe/awpaas-manager)
-    * [构建通用go打包镜像](https://github.com/afterloe/AwPaas/tree/master/awpaas-builder)
-    * [构建打包工具打包成docker镜像](https://github.com/afterloe/awpaas-route/blob/master/Makefile)
+    * [构建通用go打包镜像](https://github.com/afterloe/AwPaas/tree/master/awpaas-build
+er)
+    * [构建打包工具打包成docker镜像](https://github.com/afterloe/awpaas-route/blob/mas
+ter/Makefile)
     * [实战 - 使用gin构建web基础框架](day08_framework.md)
     * 调用docker api 构建一个SOA服务管理平台
     * docker 封装go的服务实现ci
@@ -60,7 +66,7 @@ golang day08中的项目已经单独立项了，可以关注 https://github.com/
 * [第十二天（实战） Docker 增量维护](https://github.com/afterloe/awpaas-repository)
     * 链接CouchDB
 
-## 备忘录
+## <a name="#2">备忘录</a>
 
 ## 不错的开源框架
 **[NSQ](https://github.com/nsqio/nsq)**  
