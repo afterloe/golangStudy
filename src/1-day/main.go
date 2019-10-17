@@ -71,6 +71,7 @@ func main() {
 	arr1 := [3]int {1, 2, 3} // 带有数据的初始化
 	fmt.Printf("the first element is %d \n", arr1[2])
 
+    // 动态数组slice
 	arr2 := [...]int {4, 5, 6} // 省略长度，自动计算
 	fmt.Printf("the first element is %d \n", arr2[0])
 
@@ -86,6 +87,7 @@ func main() {
 		bSlice = arr3[4:5]
 	)
 
+    // 数组切割
 	fmt.Println(arr3[3:])
 	fmt.Println(arr4[4:])
 	fmt.Println(arr4[2:4])
@@ -104,14 +106,19 @@ func main() {
 	fmt.Printf("element is %d", numberMap["one"]) // 读取数据
 
 	numberMap = map[string]int {"c": 4, "d": 23} // 直接赋值
+    numberMap["two"] = 2
 	_, ok := numberMap["one"] // 判断 这个 map 是否包含 one
 	if ok {
 		// map内置有判断是否存在key的方式，通过delete删除map的元素
 		fmt.Println("one is ")
 	} else {
 		// map也是一种引用类型，如果两个map同时指向一个底层，那么一个改变，另一个也相应改变
-		fmt.Printf("no have one . map len is %d", len(numberMap))
+		fmt.Printf("no have one . map len is %d \r\n", len(numberMap))
 	}
+    //  两种写法
+    if val, ok := numberMap["two"]; ok {
+        fmt.Printf("two number is -> %d \r\n", val)
+    }
 
 	/*
 	各类型初始值
