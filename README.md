@@ -9,7 +9,7 @@
 <a href="#backup">备忘录</a>  
 
 ## golang 教程 学习笔记&开发日记
-golang 开发的规范请参考(官方的标准)[https://github.com/golang/go/wiki/CodeReviewComments]
+golang 开发的规范请参考[官方的标准](https://github.com/golang/go/wiki/CodeReviewComments)
 
 ### <a id="note">笔记</a>
 golang day08中的项目已经单独立项了，可以关注 https://github.com/afterloe/AwPaas 下的 https://github.com/afterloe/awpaas-manager 项目
@@ -51,10 +51,8 @@ golang day08中的项目已经单独立项了，可以关注 https://github.com/
     * opencv 应用
     * 图像识别探索
 * [第十天](https://github.com/afterloe/awpaas-manager)
-    * [构建通用go打包镜像](https://github.com/afterloe/AwPaas/tree/master/awpaas-build
-er)
-    * [构建打包工具打包成docker镜像](https://github.com/afterloe/awpaas-route/blob/mas
-ter/Makefile)
+    * [构建通用go打包镜像](https://github.com/afterloe/AwPaas/tree/master/awpaas-builder)
+    * [构建打包工具打包成docker镜像](https://github.com/afterloe/awpaas-route/blob/master/Makefile)
     * [实战 - 使用gin构建web基础框架](day08_framework.md)
     * 调用docker api 构建一个SOA服务管理平台
     * docker 封装go的服务实现ci
