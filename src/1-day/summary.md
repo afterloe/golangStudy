@@ -1,5 +1,31 @@
 # 第一天
-> 代码链接 [./Main.go](./Main.go)
+> 代码链接 [./main.go](./main.go)
+
+## 写在前面的话
+如果只是运行可以使用`go run main.go` 来执行，不用build。
+
+## go工程的目录结构
+```sbtshell
+GOPATH
+--- bin # 存放编译后的相关可执行文件
+--- pkg # 平台相关目录
+--- src # 源码
+```
+
+> 查找源码的方式
+```shell
+$ which go
+/usr/bin/go
+$ cd /usr/bin
+$ ls -las | grep go
+     0 lrwxrwxrwx  1 root root           16 Sep 17 14:48 go -> ../lib/go/bin/go
+$ cd ../lib/go
+$ ls
+api      CONTRIBUTING.md  favicon.ico  misc     README.md    src
+AUTHORS  CONTRIBUTORS     lib          PATENTS  robots.txt   test
+bin      doc              LICENSE      pkg      SECURITY.md  VERSION
+$ cd src
+```
 
 ## GO 中的潜规则
 
