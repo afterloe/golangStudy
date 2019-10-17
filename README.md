@@ -5,13 +5,13 @@
 > MIT License    
 
 ## 目录
-<a href="#1">笔记</a>  
-<a href="#2">备忘录</a>  
+<a href="#note">笔记</a>  
+<a href="#backup">备忘录</a>  
 
 ## golang 教程 学习笔记&开发日记
 golang 开发的规范请参考(官方的标准)[https://github.com/golang/go/wiki/CodeReviewComments]
 
-### <a name="#1">笔记</a>
+### <a id="note">笔记</a>
 golang day08中的项目已经单独立项了，可以关注 https://github.com/afterloe/AwPaas 下的 https://github.com/afterloe/awpaas-manager 项目
 > 时隔半年继续更新，用go做了一个项目，将项目中碰到的点滴分享一下。将原来的第七天的内容改为了udp，第九天增加了c++扩展, 具体目录如下
 
@@ -66,9 +66,9 @@ ter/Makefile)
 * [第十二天（实战） Docker 增量维护](https://github.com/afterloe/awpaas-repository)
     * 链接CouchDB
 
-## <a name="#2">备忘录</a>
+## <a name="backup">备忘录</a>
 
-## 不错的开源框架
+### 不错的开源框架
 **[NSQ](https://github.com/nsqio/nsq)**  
 实时分发的消息平台，用于极大规模的数据处理，处理量级10亿+。  
 
