@@ -1,7 +1,7 @@
 # 目录
 
 * [前言](README.md)
-* [第一天](./src/1-day/summary.md)
+* [第一天](./src/1-learn/summary.md)
     * 变量、常量
     * map & slice 的初始化及使用
     * make & new 以及默认值
