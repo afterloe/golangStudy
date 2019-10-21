@@ -5,8 +5,9 @@
 > MIT License    
 
 ## 目录
-<a href="#note">笔记</a>  
-<a href="#backup">备忘录</a>  
+- <a href="#note">笔记</a>  
+- <a href="#backup">备忘录</a>  
+- <a href="#install">golang 环境准备</a>
 
 ## golang 教程 学习笔记&开发日记
 golang 开发的规范请参考[官方的标准](https://github.com/golang/go/wiki/CodeReviewComments)
@@ -66,6 +67,7 @@ golang day08中的项目已经单独立项了，可以关注 https://github.com/
 
 ## <a name="backup">备忘录</a>
 
+
 ### 不错的开源框架
 **[NSQ](https://github.com/nsqio/nsq)**  
 实时分发的消息平台，用于极大规模的数据处理，处理量级10亿+。  
@@ -101,3 +103,15 @@ Auto HTTPS Caddy 使用 Let’s Encrypt 让你的站点全自动变成全站HTTP
 一个持续不断的文件同步项目，能够在两台或者多台电脑上同步文件，使用了其独有的对等自由块交换协议，速度极快  
 
 
+## <a name="install">golang 环境准备</a>
+```
+$ wget https://dl.google.com/go/go1.12.linux-amd64.tar.gz
+$ sudo tar xzvf go1.12.linux-amd64.tar.gz -C /usr/local/
+```
+
+配置go path 及 go root
+```
+$ sudo vim /etc/profile.d/go.sh
+export GOROOT=/usr/local/go
+export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
+```
