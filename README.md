@@ -49,7 +49,9 @@ golang day08中的项目已经单独立项了，可以关注 https://github.com/
     * 压力、性能测试
     * mock 测试
 * [第九天](9-learn/summary.md)
-    * gRPC服务构建及测试
+    * 编译安装protoc
+    * gRPC服务构建步骤
+    * 测试
 * [第十天](10-learn/summary.md)
     * [构建通用Go打包镜像](10-learn/build_by_docker.md)
 
