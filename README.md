@@ -40,7 +40,7 @@ golang day08中的项目已经单独立项了，可以关注 https://github.com/
     * http服务之默认路由
     * 自定义路由
     * 文件上传
-* [第七天](7-learn/summary.md)
+* [第七天](7-learn/index.md)
     * udp服务
     * udp客户端
     * 远程命令控制
@@ -54,7 +54,7 @@ golang day08中的项目已经单独立项了，可以关注 https://github.com/
     * [C++客户端调用测试](9-learn/build_cpp_grpc_client.md)
 * [第十天](10-learn/README.md)
     * [增强Context, gin封装web服务](10-learn/enhance_context.md)
-    * 国密算法集成
+    * [国密算法集成](10-learn/use_gmssl.md)
     * jwt Token
     * Swagger 配置
     * [构建通用Go打包镜像](10-learn/build_by_docker.md)
