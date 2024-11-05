@@ -17,3 +17,7 @@ pkg
 day08/html/js/lib
 day08/html/stylesheets/lib
 day08/html/images/
+
+# cmake
+**/build/*
+**/cmake-build-debug/*

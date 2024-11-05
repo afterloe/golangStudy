@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package middleware;
+
+import "google/protobuf/timestamp.proto";
+
+option go_package = "onenet/middleware";
+
+message User {
+  string username = 1;
+  string full_name = 2;
+  string email = 3;
+  google.protobuf.Timestamp created_at = 5;
+}

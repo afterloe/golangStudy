@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+option go_package = "./;pb";
+
+package Logic;
+
+service UserServer {
+  rpc Login(LoginRequest) returns (LoginResponse);
+}
+
+message LoginRequest {
+  string LoginName = 1;
+  string Scrip = 2;
+}
+
+message LoginResponse {
+  string SessionID = 1;
+  string AccessToken = 2;
+  string RefreshToken =3;
+}

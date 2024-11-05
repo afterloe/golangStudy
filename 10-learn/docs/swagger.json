@@ -1,0 +1,473 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "contact": {}
+    },
+    "paths": {
+        "/album/create_one": {
+            "post": {
+                "description": "创建相册",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "创建相册",
+                "parameters": [
+                    {
+                        "description": "创建相册所需要的参数",
+                        "name": "json",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/album.CreateAlbumRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "请求成功",
+                        "schema": {
+                            "$ref": "#/definitions/internal.CommonResponse-album_CreateAlbumResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/album/list": {
+            "post": {
+                "description": "列表查询所有相册",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "列表查询所有相册",
+                "parameters": [
+                    {
+                        "description": "分页参数",
+                        "name": "json",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/album.ListRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "请求成功",
+                        "schema": {
+                            "$ref": "#/definitions/internal.CommonResponse-album_ListResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/authorize/login": {
+            "post": {
+                "description": "登陆",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "登陆",
+                "parameters": [
+                    {
+                        "description": "登陆时所需要的信息",
+                        "name": "json",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/authorize.LoginRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "token信息",
+                        "schema": {
+                            "$ref": "#/definitions/internal.CommonResponse-authorize_LoginResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/authorize/register": {
+            "post": {
+                "description": "注册用户",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "注册用户",
+                "parameters": [
+                    {
+                        "description": "注册用户所需的信息",
+                        "name": "json",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/authorize.RegisterRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "请求成功",
+                        "schema": {
+                            "$ref": "#/definitions/internal.CommonResponse-string"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "album.CreateAlbumRequest": {
+            "type": "object",
+            "required": [
+                "title"
+            ],
+            "properties": {
+                "description": {
+                    "description": "描述",
+                    "type": "string"
+                },
+                "summary": {
+                    "description": "概况",
+                    "type": "string"
+                },
+                "title": {
+                    "description": "相册标题",
+                    "type": "string"
+                }
+            }
+        },
+        "album.CreateAlbumResponse": {
+            "type": "object",
+            "required": [
+                "title"
+            ],
+            "properties": {
+                "description": {
+                    "description": "描述",
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "summary": {
+                    "description": "概况",
+                    "type": "string"
+                },
+                "title": {
+                    "description": "相册标题",
+                    "type": "string"
+                }
+            }
+        },
+        "album.ListRequest": {
+            "type": "object",
+            "properties": {
+                "content": {
+                    "type": "string"
+                },
+                "page": {
+                    "description": "第几页",
+                    "type": "integer",
+                    "default": 1
+                },
+                "size": {
+                    "description": "每页多少条",
+                    "type": "integer",
+                    "default": 10
+                }
+            }
+        },
+        "album.ListResponse": {
+            "type": "object",
+            "properties": {
+                "records": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/entity.Album"
+                    }
+                },
+                "total": {
+                    "type": "integer"
+                }
+            }
+        },
+        "authorize.LoginRequest": {
+            "type": "object",
+            "required": [
+                "login_name",
+                "scrip"
+            ],
+            "properties": {
+                "login_name": {
+                    "description": "用户名",
+                    "type": "string"
+                },
+                "scrip": {
+                    "description": "编码",
+                    "type": "string"
+                }
+            }
+        },
+        "authorize.LoginResponse": {
+            "type": "object",
+            "properties": {
+                "access_token": {
+                    "type": "string"
+                },
+                "refresh_token": {
+                    "type": "string"
+                },
+                "session_id": {
+                    "type": "string"
+                },
+                "user": {
+                    "type": "string"
+                }
+            }
+        },
+        "authorize.RegisterRequest": {
+            "type": "object",
+            "required": [
+                "password",
+                "username"
+            ],
+            "properties": {
+                "password": {
+                    "description": "密码",
+                    "type": "string"
+                },
+                "username": {
+                    "description": "用户名",
+                    "type": "string"
+                }
+            }
+        },
+        "entity.Album": {
+            "type": "object",
+            "properties": {
+                "_id": {
+                    "type": "string"
+                },
+                "artist": {
+                    "description": "创建人名字",
+                    "type": "string"
+                },
+                "created_at": {
+                    "description": "创建时间",
+                    "type": "string"
+                },
+                "created_by": {
+                    "description": "创建人",
+                    "type": "string"
+                },
+                "deleted": {
+                    "description": "是否逻辑删除",
+                    "type": "boolean"
+                },
+                "description": {
+                    "description": "描述",
+                    "type": "string"
+                },
+                "first_pic": {
+                    "description": "第一张照片",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/entity.Picture"
+                        }
+                    ]
+                },
+                "id": {
+                    "type": "string"
+                },
+                "last_view_at": {
+                    "description": "上次查看日期",
+                    "type": "string"
+                },
+                "modified_at": {
+                    "description": "修改时间",
+                    "type": "string"
+                },
+                "modified_by": {
+                    "description": "修改人",
+                    "type": "string"
+                },
+                "order_index": {
+                    "description": "排序，升序",
+                    "type": "integer"
+                },
+                "price": {
+                    "description": "照片数量",
+                    "type": "integer"
+                },
+                "summary": {
+                    "description": "概况",
+                    "type": "string"
+                },
+                "title": {
+                    "description": "相册标题",
+                    "type": "string"
+                }
+            }
+        },
+        "entity.Picture": {
+            "type": "object",
+            "properties": {
+                "_id": {
+                    "type": "string"
+                },
+                "abs_path": {
+                    "description": "相对路径",
+                    "type": "string"
+                },
+                "created_at": {
+                    "description": "创建时间",
+                    "type": "string"
+                },
+                "created_by": {
+                    "description": "创建人",
+                    "type": "string"
+                },
+                "deleted": {
+                    "description": "是否逻辑删除",
+                    "type": "boolean"
+                },
+                "file_name": {
+                    "description": "文件名",
+                    "type": "string"
+                },
+                "hidden": {
+                    "description": "是否隐藏",
+                    "type": "boolean"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "location": {
+                    "description": "拍摄位置",
+                    "type": "string"
+                },
+                "modified_at": {
+                    "description": "修改时间",
+                    "type": "string"
+                },
+                "modified_by": {
+                    "description": "修改人",
+                    "type": "string"
+                },
+                "real_path": {
+                    "description": "真实路径",
+                    "type": "string"
+                },
+                "size": {
+                    "description": "照片大小，字节",
+                    "type": "integer"
+                },
+                "suffix": {
+                    "description": "后缀名",
+                    "type": "string"
+                },
+                "tags": {
+                    "description": "标签",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "internal.CommonResponse-album_CreateAlbumResponse": {
+            "type": "object",
+            "properties": {
+                "biz_code": {
+                    "description": "业务编码，0 - 正常",
+                    "type": "integer"
+                },
+                "error": {
+                    "description": "异常信息，正确请求时为空白",
+                    "type": "string"
+                },
+                "result": {
+                    "description": "返回的数据",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/album.CreateAlbumResponse"
+                        }
+                    ]
+                }
+            }
+        },
+        "internal.CommonResponse-album_ListResponse": {
+            "type": "object",
+            "properties": {
+                "biz_code": {
+                    "description": "业务编码，0 - 正常",
+                    "type": "integer"
+                },
+                "error": {
+                    "description": "异常信息，正确请求时为空白",
+                    "type": "string"
+                },
+                "result": {
+                    "description": "返回的数据",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/album.ListResponse"
+                        }
+                    ]
+                }
+            }
+        },
+        "internal.CommonResponse-authorize_LoginResponse": {
+            "type": "object",
+            "properties": {
+                "biz_code": {
+                    "description": "业务编码，0 - 正常",
+                    "type": "integer"
+                },
+                "error": {
+                    "description": "异常信息，正确请求时为空白",
+                    "type": "string"
+                },
+                "result": {
+                    "description": "返回的数据",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/authorize.LoginResponse"
+                        }
+                    ]
+                }
+            }
+        },
+        "internal.CommonResponse-string": {
+            "type": "object",
+            "properties": {
+                "biz_code": {
+                    "description": "业务编码，0 - 正常",
+                    "type": "integer"
+                },
+                "error": {
+                    "description": "异常信息，正确请求时为空白",
+                    "type": "string"
+                },
+                "result": {
+                    "description": "返回的数据",
+                    "type": "string"
+                }
+            }
+        }
+    }
+}
