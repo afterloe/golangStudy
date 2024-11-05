@@ -1,6 +1,8 @@
 构建c++ grpc客户端
 ===
-生成过程参考[官方文档](https://grpc.org.cn/docs/languages/cpp/quickstart/)
+生成过程参考[官方文档](https://grpc.org.cn/docs/languages/cpp/quickstart/)  
+源码位置: [CppGrpcClient](./CppGrpcClient/src/main.cpp)
+
 ## 环境准备
 构建环境
 ```shell
