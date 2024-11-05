@@ -28,7 +28,20 @@
 | main.go    | 入口文件 | 程序入口文件。                                            |
 
 ## 数据库
-使用CouchDB
+CouchDB
 ```shell
-docker 
+docker run -d \
+-p 5984:5984 \
+--name my-couchdb \
+-e COUCHDB_USER=admin \
+-e COUCHDB_PASSWORD=111111hZ! \
+apache/couchdb:latest
 ```
+
+## 相关资料
+
+* [增强Context, gin封装web服务](enhance_context.md)
+* [国密算法集成](use_gmssl.md)
+* [jwt Token](bear_token.md)
+* [Swagger 配置](use_swagger.md)
+* [构建通用Go打包镜像](build_by_docker.md)
