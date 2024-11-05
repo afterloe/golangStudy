@@ -10,7 +10,24 @@ apt install -y protoc
 protoc --version
 libprotoc 25.1
 ```
-或者从github官网下载源码进行编译
+或者从github官网下载
+```shell
+wget https://objects.githubusercontent.com/github-production-release-asset-2e65be/23357588/492b7b27-88e2-457a-8613-05c78a4010b5?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=releaseassetproduction%2F20241104%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20241104T021518Z&X-Amz-Expires=300&X-Amz-Signature=f2ae84ea7d203d191167443c615868f38df4842f926d4959f21977e9a2469f2b&X-Amz-SignedHeaders=host&response-content-disposition=attachment%3B%20filename%3Dprotoc-29.0-rc-2-linux-x86_64.zip&response-content-type=application%2Foctet-stream
+ls 
+protoc-28.3-linux-x86_64.zip
+
+cd /usr/local/src
+mkdir protoc-bin
+cd protoc-bin
+mv ~/Downloads/protoc-28.3-linux-x86_64.zip .
+unzip protoc-28.3-linux-x86_64.zip
+ls
+bin  include  protoc-28.3-linux-x86_64.zip  readme.txt
+cd /usr/local/bin
+ln -s /usr/local/protoc-bin/bin/protoc .
+protoc --version
+libprotoc 25.1
+```
 
 ### 编写proto文件
 ```protobuf

@@ -50,8 +50,8 @@ golang day08中的项目已经单独立项了，可以关注 https://github.com/
     * mock 测试
 * [第九天](9-learn/summary.md)
     * 编译安装protoc
-    * gRPC服务构建步骤
-    * 测试
+    * [gRPC服务构建步骤](9-learn/main.go)
+    * [C++客户端调用测试](9-learn/build_cpp_grpc_client.md)
 * [第十天](10-learn/summary.md)
     * [构建通用Go打包镜像](10-learn/build_by_docker.md)
 
