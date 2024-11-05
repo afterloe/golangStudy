@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package middleware;
+
+import "user.proto";
+
+option go_package = "onenet/middleware";
+
+message ListUserReq {
+  int32 page = 1;
+  int32 size = 2;
+  string content = 3;
+}
+
+message ListUserRes {
+  User user = 1;
+}

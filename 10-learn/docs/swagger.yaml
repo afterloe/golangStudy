@@ -1,0 +1,318 @@
+definitions:
+  album.CreateAlbumRequest:
+    properties:
+      description:
+        description: 描述
+        type: string
+      summary:
+        description: 概况
+        type: string
+      title:
+        description: 相册标题
+        type: string
+    required:
+    - title
+    type: object
+  album.CreateAlbumResponse:
+    properties:
+      description:
+        description: 描述
+        type: string
+      id:
+        type: string
+      summary:
+        description: 概况
+        type: string
+      title:
+        description: 相册标题
+        type: string
+    required:
+    - title
+    type: object
+  album.ListRequest:
+    properties:
+      content:
+        type: string
+      page:
+        default: 1
+        description: 第几页
+        type: integer
+      size:
+        default: 10
+        description: 每页多少条
+        type: integer
+    type: object
+  album.ListResponse:
+    properties:
+      records:
+        items:
+          $ref: '#/definitions/entity.Album'
+        type: array
+      total:
+        type: integer
+    type: object
+  authorize.LoginRequest:
+    properties:
+      login_name:
+        description: 用户名
+        type: string
+      scrip:
+        description: 编码
+        type: string
+    required:
+    - login_name
+    - scrip
+    type: object
+  authorize.LoginResponse:
+    properties:
+      access_token:
+        type: string
+      refresh_token:
+        type: string
+      session_id:
+        type: string
+      user:
+        type: string
+    type: object
+  authorize.RegisterRequest:
+    properties:
+      password:
+        description: 密码
+        type: string
+      username:
+        description: 用户名
+        type: string
+    required:
+    - password
+    - username
+    type: object
+  entity.Album:
+    properties:
+      _id:
+        type: string
+      artist:
+        description: 创建人名字
+        type: string
+      created_at:
+        description: 创建时间
+        type: string
+      created_by:
+        description: 创建人
+        type: string
+      deleted:
+        description: 是否逻辑删除
+        type: boolean
+      description:
+        description: 描述
+        type: string
+      first_pic:
+        allOf:
+        - $ref: '#/definitions/entity.Picture'
+        description: 第一张照片
+      id:
+        type: string
+      last_view_at:
+        description: 上次查看日期
+        type: string
+      modified_at:
+        description: 修改时间
+        type: string
+      modified_by:
+        description: 修改人
+        type: string
+      order_index:
+        description: 排序，升序
+        type: integer
+      price:
+        description: 照片数量
+        type: integer
+      summary:
+        description: 概况
+        type: string
+      title:
+        description: 相册标题
+        type: string
+    type: object
+  entity.Picture:
+    properties:
+      _id:
+        type: string
+      abs_path:
+        description: 相对路径
+        type: string
+      created_at:
+        description: 创建时间
+        type: string
+      created_by:
+        description: 创建人
+        type: string
+      deleted:
+        description: 是否逻辑删除
+        type: boolean
+      file_name:
+        description: 文件名
+        type: string
+      hidden:
+        description: 是否隐藏
+        type: boolean
+      id:
+        type: string
+      location:
+        description: 拍摄位置
+        type: string
+      modified_at:
+        description: 修改时间
+        type: string
+      modified_by:
+        description: 修改人
+        type: string
+      real_path:
+        description: 真实路径
+        type: string
+      size:
+        description: 照片大小，字节
+        type: integer
+      suffix:
+        description: 后缀名
+        type: string
+      tags:
+        description: 标签
+        items:
+          type: string
+        type: array
+    type: object
+  internal.CommonResponse-album_CreateAlbumResponse:
+    properties:
+      biz_code:
+        description: 业务编码，0 - 正常
+        type: integer
+      error:
+        description: 异常信息，正确请求时为空白
+        type: string
+      result:
+        allOf:
+        - $ref: '#/definitions/album.CreateAlbumResponse'
+        description: 返回的数据
+    type: object
+  internal.CommonResponse-album_ListResponse:
+    properties:
+      biz_code:
+        description: 业务编码，0 - 正常
+        type: integer
+      error:
+        description: 异常信息，正确请求时为空白
+        type: string
+      result:
+        allOf:
+        - $ref: '#/definitions/album.ListResponse'
+        description: 返回的数据
+    type: object
+  internal.CommonResponse-authorize_LoginResponse:
+    properties:
+      biz_code:
+        description: 业务编码，0 - 正常
+        type: integer
+      error:
+        description: 异常信息，正确请求时为空白
+        type: string
+      result:
+        allOf:
+        - $ref: '#/definitions/authorize.LoginResponse'
+        description: 返回的数据
+    type: object
+  internal.CommonResponse-string:
+    properties:
+      biz_code:
+        description: 业务编码，0 - 正常
+        type: integer
+      error:
+        description: 异常信息，正确请求时为空白
+        type: string
+      result:
+        description: 返回的数据
+        type: string
+    type: object
+info:
+  contact: {}
+paths:
+  /album/create_one:
+    post:
+      consumes:
+      - application/json
+      description: 创建相册
+      parameters:
+      - description: 创建相册所需要的参数
+        in: body
+        name: json
+        required: true
+        schema:
+          $ref: '#/definitions/album.CreateAlbumRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 请求成功
+          schema:
+            $ref: '#/definitions/internal.CommonResponse-album_CreateAlbumResponse'
+      summary: 创建相册
+  /album/list:
+    post:
+      consumes:
+      - application/json
+      description: 列表查询所有相册
+      parameters:
+      - description: 分页参数
+        in: body
+        name: json
+        required: true
+        schema:
+          $ref: '#/definitions/album.ListRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 请求成功
+          schema:
+            $ref: '#/definitions/internal.CommonResponse-album_ListResponse'
+      summary: 列表查询所有相册
+  /authorize/login:
+    post:
+      consumes:
+      - application/json
+      description: 登陆
+      parameters:
+      - description: 登陆时所需要的信息
+        in: body
+        name: json
+        required: true
+        schema:
+          $ref: '#/definitions/authorize.LoginRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: token信息
+          schema:
+            $ref: '#/definitions/internal.CommonResponse-authorize_LoginResponse'
+      summary: 登陆
+  /authorize/register:
+    post:
+      consumes:
+      - application/json
+      description: 注册用户
+      parameters:
+      - description: 注册用户所需的信息
+        in: body
+        name: json
+        required: true
+        schema:
+          $ref: '#/definitions/authorize.RegisterRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 请求成功
+          schema:
+            $ref: '#/definitions/internal.CommonResponse-string'
+      summary: 注册用户
+swagger: "2.0"
