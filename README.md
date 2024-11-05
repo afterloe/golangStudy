@@ -49,65 +49,26 @@ golang day08中的项目已经单独立项了，可以关注 https://github.com/
     * 压力、性能测试
     * mock 测试
 * [第九天](9-learn/summary.md)
-    * c++拓展
-    * opencv 应用
-    * 图像识别探索
-* [第十天](10-learn)
+    * gRPC服务构建及测试
+* [第十天](10-learn/summary.md)
     * [构建通用Go打包镜像](10-learn/build_by_docker.md)
-* [第十天](https://github.com/afterloe/awpaas-manager)
-    * [构建通用go打包镜像](https://github.com/afterloe/AwPaas/tree/master/awpaas-builder)
-    * [构建打包工具打包成docker镜像](https://github.com/afterloe/awpaas-route/blob/master/Makefile)
-    * [实战 - 使用gin构建web基础框架](day08_framework.md)
-    * 调用docker api 构建一个SOA服务管理平台
-    * docker 封装go的服务实现ci
 
 ## <a name="backup">备忘录</a>
 
-
-### 不错的开源框架
-**[NSQ](https://github.com/nsqio/nsq)**  
-实时分发的消息平台，用于极大规模的数据处理，处理量级10亿+。  
-
-**[Traefik](https://github.com/containous/traefik)**  
-开源的反向代理与负载均衡工具。它最大的优点是能够与常见的微服务系统直接整合，可以实现自动化动态配置。  
-
-**[Influxdb](https://github.com/influxdata/influxdb)**  
-开源的分布式时序、时间和指标数据库，使用go语言编写，无需外部依赖  
-
-**[Grafana](https://github.com/grafana/grafana)**  
-开源的，具有丰富功能的度量标准仪表板和图形编辑器，用于显示Graphite，Elasticsearch，OpenTSDB，Prometheus和InfluxDB等数据，定制化高  
-
-**[Fabric](https://github.com/hyperledger/fabric)**  
-区块链超级账本Hyperledger Fabric实现，用于联盟链开发。  
-
-**[Caddy](https://github.com/mholt/caddy)**  
-Auto HTTPS Caddy 使用 Let’s Encrypt 让你的站点全自动变成全站HTTPS，无需任何配置。当然你想使用自己的证书也行  
-
-**[Hugo](https://github.com/gohugoio/hugo)**  
-一个静态的，可伸缩的网页生成器，宣称世界上最快的建站框架。  
-
-**[Gogs](https://github.com/gogs/gogs)**  
-一款极易搭建的自助Git服务  
-
-**[Frp](https://github.com/fatedier/frp)**  
-一个可用于内网穿透的高性能的反向代理应用，支持 tcp, udp 协议，为 http 和 https 应用协议提供了额外的能力，且尝试性支持了点对点穿透  
-
-**[Proxypool](https://github.com/henson/proxypool)**  
-采集免费的代理资源为爬虫提供有效的IP代理  
-
-**[Syncthing](https://github.com/syncthing/syncthing)**  
-一个持续不断的文件同步项目，能够在两台或者多台电脑上同步文件，使用了其独有的对等自由块交换协议，速度极快  
-
-
 ## <a name="install">golang 环境准备</a>
-```
-$ wget https://dl.google.com/go/go1.12.linux-amd64.tar.gz
-$ sudo tar xzvf go1.12.linux-amd64.tar.gz -C /usr/local/
+```bash
+wget https://dl.google.com/go/go1.12.linux-amd64.tar.gz
+sudo tar xzvf go1.12.linux-amd64.tar.gz -C /usr/local/
 ```
 
 配置go path 及 go root
-```
+```bash
 $ sudo vim /etc/profile.d/go.sh
 export GOROOT=/usr/local/go
 export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
+
+# Set the GOPROXY environment variable
+export GOPROXY=https://goproxy.io,direct
+# Set environment variable allow bypassing the proxy for specified repos (optional)
+export GOPRIVATE=git.mycompany.com,github.com/my/private
 ```
