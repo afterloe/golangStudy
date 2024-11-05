@@ -58,6 +58,7 @@ message LoginResponse {
 
 ### 安装go的proto插件
 ```shell
+sudo apt install systemd-dev  # 安装插件时可能会出一些莫名其妙的bug,如果失败了 就现安装这个
 go install google.golang.org/protobuf/cmd/protoc-gen-go@v1.28
 go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@v1.2
 
