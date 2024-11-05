@@ -55,8 +55,8 @@ golang day08中的项目已经单独立项了，可以关注 https://github.com/
 * [第十天](10-learn/README.md)
     * [增强Context, gin封装web服务](10-learn/enhance_context.md)
     * [国密算法集成](10-learn/use_gmssl.md)
-    * jwt Token
-    * Swagger 配置
+    * [jwt Token](10-learn/bear_token.md)
+    * [Swagger 配置](10-learn/use_swagger.md)
     * [构建通用Go打包镜像](10-learn/build_by_docker.md)
 
 ## <a name="backup">备忘录</a>
