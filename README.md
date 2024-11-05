@@ -53,7 +53,7 @@ golang day08中的项目已经单独立项了，可以关注 https://github.com/
     * [gRPC服务构建步骤](9-learn/main.go)
     * [C++客户端调用测试](9-learn/build_cpp_grpc_client.md)
 * [第十天](10-learn/README.md)
-    * 增强Context, gin封装web服务
+    * [增强Context, gin封装web服务](10-learn/enhance_context.md)
     * 国密算法集成
     * jwt Token
     * Swagger 配置

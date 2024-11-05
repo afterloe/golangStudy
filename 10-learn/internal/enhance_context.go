@@ -17,7 +17,7 @@ type Context struct {
 // HandlerFunc 路由接收的默认参数
 type HandlerFunc func(c *Context)
 
-// EnhanceContext 增强Context防范
+// EnhanceContext 增强Context方法
 func EnhanceContext(handler HandlerFunc) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		handler(&Context{c})
